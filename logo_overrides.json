@@ -1,0 +1,9 @@
+{
+  "_help": "Fix or hide logos by hand. Use the team/league name exactly as your API writes it. A URL sets the logo, null hides it.",
+  "teams": {
+    "Example FC": "https://media.api-sports.io/football/teams/42.png"
+  },
+  "leagues": {
+    "Example League": null
+  }
+}

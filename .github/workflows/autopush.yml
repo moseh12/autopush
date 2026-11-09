@@ -39,13 +39,20 @@ jobs:
           ONLY_APP: ${{ github.event.inputs.only_app }}
         run: node autopush.mjs
 
+      - name: Update team & league logos
+        if: always() && (github.event.inputs.mode == 'poll' || (github.event_name == 'schedule' && github.event.schedule != '0 6 * * *'))
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: node logos.mjs
+
       - name: Save state
         if: always()
         run: |
-          if git diff --quiet -- state.json; then echo "state unchanged"; exit 0; fi
+          git add -N logos.json 2>/dev/null || true
+          if git diff --quiet -- state.json logos.json; then echo "state unchanged"; exit 0; fi
           git config user.name  "autopush-bot"
           git config user.email "autopush-bot@users.noreply.github.com"
-          git add state.json
+          git add state.json logos.json 2>/dev/null || git add state.json
           git commit -m "Update tip state [skip ci]"
           git pull --rebase --autostash || true
           git push
