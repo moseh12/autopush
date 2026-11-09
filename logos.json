@@ -1,14 +1,19 @@
 {
- "updated": "2026-11-09T11:07:36.044Z",
+ "updated": "2026-11-09T18:45:34.365Z",
  "quota": {
   "day": "2026-11-09",
-  "used": 16
+  "used": 24
  },
  "teams": {
+  "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
+  "botosani": "https://media.api-sports.io/football/teams/2581.png",
   "bromley u21": "https://media.api-sports.io/football/teams/24846.png",
   "cska sofia ii": "https://media.api-sports.io/football/teams/1415.png",
   "example fc": "https://media.api-sports.io/football/teams/42.png",
-  "fc suhareka": "https://media.api-sports.io/football/teams/22817.png"
+  "fc suhareka": "https://media.api-sports.io/football/teams/22817.png",
+  "hapoel acre": "https://media.api-sports.io/football/teams/4482.png",
+  "otelul": "https://media.api-sports.io/football/teams/6886.png",
+  "rilski sportist": "https://media.api-sports.io/football/teams/8547.png"
  },
  "leagues": {
   "colombia": "https://media.api-sports.io/football/leagues/241.png",
@@ -23,9 +28,12 @@
   "l:kosovo": "2026-11-09T10:48:07.105Z",
   "l:romania": "2026-11-09T10:48:33.911Z",
   "t:h akko": "2026-11-09T11:06:56.252Z",
+  "t:hvidovre if": "2026-11-09T18:44:53.903Z",
+  "t:ind valle del cauca": "2026-11-09T18:45:27.603Z",
   "t:ironi modiin": "2026-11-09T11:06:49.613Z",
   "t:kf ferizaj": "2026-11-09T11:07:02.913Z",
   "t:pfc rilski sporti": "2026-11-09T11:07:22.795Z",
+  "t:u magdalena": "2026-11-09T18:45:34.365Z",
   "t:west brom u21": "2026-11-09T11:07:29.437Z"
  }
 }
