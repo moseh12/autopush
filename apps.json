@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "baseUrl": "https://mchumwasure.top/api",
+    "topic": "all",
+    "wonStatuses": ["won", "win", "winner"],
+    "daily": {
+      "title": "🔥 Today's tips are ready",
+      "body": "Fresh free and VIP predictions are live. Tap to see them before kick-off.",
+      "screen": "free"
+    }
+  },
+  "apps": [
+    {
+      "id": "cashscoretips",
+      "name": "CashScore Tips",
+      "enabled": true,
+      "android": { "channelId": "cashscore_tips", "icon": "ic_stat_notification", "color": "#00FF66" },
+      "endpoints": [
+        { "path": "sure-tips",    "label": "Free Sure Tips",    "screen": "free" },
+        { "path": "over-tips",    "label": "Over Tips",         "screen": "free" },
+        { "path": "overunder",    "label": "Over/Under Tips",   "screen": "free" },
+        { "path": "daily-tips",   "label": "Daily Elite Picks", "screen": "vip" },
+        { "path": "htft-tips",    "label": "HT/FT Master",      "screen": "vip" },
+        { "path": "draws-tips",   "label": "Draw Specialist",   "screen": "vip" },
+        { "path": "premium-tips", "label": "Score Vision",      "screen": "vip" },
+        { "path": "special-tips", "label": "Platinum Vault",    "screen": "vip" }
+      ]
+    },
+    {
+      "id": "example-second-app",
+      "name": "Copy this block for each of your other apps",
+      "enabled": false,
+      "baseUrl": "https://mchumwasure.top/api",
+      "endpoints": [
+        { "path": "sure-tips", "label": "Free Tips", "screen": "free" },
+        { "path": "vip-tips",  "label": "VIP Tips",  "screen": "vip" }
+      ]
+    }
+  ]
+}

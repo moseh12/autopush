@@ -1,0 +1,51 @@
+name: Auto push notifications
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # check for new / won tips every 10 min (GitHub may delay a few minutes)
+    - cron: "0 6 * * *"      # 06:00 UTC = 09:00 Nairobi — daily "tips are ready" reminder
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "poll | daily | test"
+        default: test
+        required: true
+      only_app:
+        description: "Limit to one app id (optional)"
+        required: false
+
+permissions:
+  contents: write   # lets the job save state.json
+
+concurrency:
+  group: autopush
+  cancel-in-progress: false
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Send notifications
+        env:
+          FCM_SERVICE_ACCOUNTS: ${{ secrets.FCM_SERVICE_ACCOUNTS }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 6 * * *' && 'daily') || 'poll' }}
+          ONLY_APP: ${{ github.event.inputs.only_app }}
+        run: node autopush.mjs
+
+      - name: Save state
+        if: always()
+        run: |
+          if git diff --quiet -- state.json; then echo "state unchanged"; exit 0; fi
+          git config user.name  "autopush-bot"
+          git config user.email "autopush-bot@users.noreply.github.com"
+          git add state.json
+          git commit -m "Update tip state [skip ci]"
+          git pull --rebase --autostash || true
+          git push
