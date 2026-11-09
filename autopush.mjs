@@ -32,6 +32,7 @@ const accounts = loadAccounts();
 const state = existsSync(STATE_FILE) ? JSON.parse(readFileSync(STATE_FILE, 'utf8') || '{}') : {};
 
 let failures = 0;
+const tokenCache = new Map(); // must be declared before main runs (top-level await)
 
 // ---------------------------------------------------------------- main
 if (MODE === 'daily') {
@@ -214,7 +215,6 @@ async function push(app, title, body, data = {}, image) {
   }
 }
 
-const tokenCache = new Map();
 async function accessToken(sa) {
   if (tokenCache.has(sa.client_email)) return tokenCache.get(sa.client_email);
   const now = Math.floor(Date.now() / 1000);
