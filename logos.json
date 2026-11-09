@@ -1,4 +1,23 @@
 {
- "teams": {},
- "leagues": {}
+ "updated": "2026-11-09T10:48:47.308Z",
+ "quota": {
+  "day": "2026-11-09",
+  "used": 8
+ },
+ "teams": {
+  "example fc": "https://media.api-sports.io/football/teams/42.png"
+ },
+ "leagues": {
+  "colombia": "https://media.api-sports.io/football/leagues/241.png",
+  "denmark": "https://media.api-sports.io/football/leagues/124.png",
+  "example league": null
+ },
+ "misses": {
+  "l:bulgaria": "2026-11-09T10:48:13.805Z",
+  "l:england": "2026-11-09T10:48:20.481Z",
+  "l:israel": "2026-11-09T10:48:00.402Z",
+  "l:italy": "2026-11-09T10:48:47.308Z",
+  "l:kosovo": "2026-11-09T10:48:07.105Z",
+  "l:romania": "2026-11-09T10:48:33.911Z"
+ }
 }
