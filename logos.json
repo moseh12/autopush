@@ -1,11 +1,14 @@
 {
- "updated": "2026-11-09T10:48:47.308Z",
+ "updated": "2026-11-09T11:07:36.044Z",
  "quota": {
   "day": "2026-11-09",
-  "used": 8
+  "used": 16
  },
  "teams": {
-  "example fc": "https://media.api-sports.io/football/teams/42.png"
+  "bromley u21": "https://media.api-sports.io/football/teams/24846.png",
+  "cska sofia ii": "https://media.api-sports.io/football/teams/1415.png",
+  "example fc": "https://media.api-sports.io/football/teams/42.png",
+  "fc suhareka": "https://media.api-sports.io/football/teams/22817.png"
  },
  "leagues": {
   "colombia": "https://media.api-sports.io/football/leagues/241.png",
@@ -18,6 +21,11 @@
   "l:israel": "2026-11-09T10:48:00.402Z",
   "l:italy": "2026-11-09T10:48:47.308Z",
   "l:kosovo": "2026-11-09T10:48:07.105Z",
-  "l:romania": "2026-11-09T10:48:33.911Z"
+  "l:romania": "2026-11-09T10:48:33.911Z",
+  "t:h akko": "2026-11-09T11:06:56.252Z",
+  "t:ironi modiin": "2026-11-09T11:06:49.613Z",
+  "t:kf ferizaj": "2026-11-09T11:07:02.913Z",
+  "t:pfc rilski sporti": "2026-11-09T11:07:22.795Z",
+  "t:west brom u21": "2026-11-09T11:07:29.437Z"
  }
 }
