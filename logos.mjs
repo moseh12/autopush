@@ -56,16 +56,16 @@ const today = new Date().toISOString().slice(0, 10);
 if (db.quota.day !== today) db.quota = { day: today, used: 0 };
 
 // ---------------------------------------------------------------- collect names
-const teams = new Map(); // norm -> original
+const teams = new Map(); // norm -> original (today's tips are added first, so they are looked up first)
 const leagues = new Map();
 const urls = new Set();
+const historyUrls = new Set();
 for (const app of config.apps.filter((a) => a.enabled !== false)) {
   const base = (app.baseUrl || config.defaults?.baseUrl || '').replace(/\/$/, '');
-  for (const ep of [...(app.endpoints || []), ...(app.logoEndpoints || []).map((path) => ({ path }))]) {
-    urls.add(`${base}/${ep.path.replace(/^\//, '')}`);
-  }
+  for (const ep of app.endpoints || []) urls.add(`${base}/${ep.path.replace(/^\//, '')}`);
+  for (const path of app.logoEndpoints || []) historyUrls.add(`${base}/${path.replace(/^\//, '')}`);
 }
-for (const url of urls) {
+for (const url of [...urls, ...[...historyUrls].filter((u) => !urls.has(u))]) {
   try {
     const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(20000) });
     const body = await res.json();
@@ -91,9 +91,12 @@ const due = (kind, key) => {
   return !miss || (Date.now() - Date.parse(miss)) / 86400000 >= RETRY_DAYS;
 };
 
+// league_name in this API is usually a country ("England"); the app shows a flag for those,
+// so league lookups are off unless LOOKUP_LEAGUES=1.
+const LOOKUP_LEAGUES = process.env.LOOKUP_LEAGUES === '1';
 const queue = [
-  ...[...leagues].filter(([k]) => due('l', k)).map(([k, name]) => ['l', k, name]),
   ...[...teams].filter(([k]) => due('t', k)).map(([k, name]) => ['t', k, name]),
+  ...(LOOKUP_LEAGUES ? [...leagues].filter(([k]) => due('l', k)).map(([k, name]) => ['l', k, name]) : []),
 ];
 
 let done = 0;

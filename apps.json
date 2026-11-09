@@ -35,11 +35,6 @@
           "screen": "free"
         },
         {
-          "path": "overunder",
-          "label": "Over/Under Tips",
-          "screen": "free"
-        },
-        {
           "path": "daily-tips",
           "label": "Daily Elite Picks",
           "screen": "vip"
