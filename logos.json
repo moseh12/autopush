@@ -1,25 +1,32 @@
 {
- "updated": "2026-11-10T01:48:26.112Z",
+ "updated": "2026-11-10T08:53:24.103Z",
  "quota": {
   "day": "2026-11-10",
-  "used": 8
+  "used": 16
  },
  "teams": {
   "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
   "botosani": "https://media.api-sports.io/football/teams/2581.png",
   "bromley u21": "https://media.api-sports.io/football/teams/24846.png",
+  "cerro largo": "https://media.api-sports.io/football/teams/2369.png",
   "club brugge": "https://media.api-sports.io/football/teams/569.png",
   "cska sofia ii": "https://media.api-sports.io/football/teams/1415.png",
   "djurgardens if": "https://media.api-sports.io/football/teams/364.png",
   "eastern sc": "https://media.api-sports.io/football/teams/4451.png",
   "example fc": "https://media.api-sports.io/football/teams/42.png",
   "fc suhareka": "https://media.api-sports.io/football/teams/22817.png",
+  "fleetwood town": "https://media.api-sports.io/football/teams/1336.png",
   "hapoel acre": "https://media.api-sports.io/football/teams/4482.png",
+  "hemel hempstead": "https://media.api-sports.io/football/teams/8660.png",
   "hong kong fc": "https://media.api-sports.io/football/teams/4462.png",
+  "hull city": "https://media.api-sports.io/football/teams/64.png",
+  "liverpool": "https://media.api-sports.io/football/teams/40.png",
+  "metalul buzau": "https://media.api-sports.io/football/teams/6875.png",
   "metlaoui": "https://media.api-sports.io/football/teams/984.png",
   "otelul": "https://media.api-sports.io/football/teams/6886.png",
   "rilski sportist": "https://media.api-sports.io/football/teams/8547.png",
   "rsc anderlecht": "https://media.api-sports.io/football/teams/19046.png",
+  "torquay": "https://media.api-sports.io/football/teams/1827.png",
   "zarzis": "https://media.api-sports.io/football/teams/989.png"
  },
  "leagues": {
@@ -41,6 +48,7 @@
   "t:ironi modiin": "2026-11-09T11:06:49.613Z",
   "t:kf ferizaj": "2026-11-09T11:07:02.913Z",
   "t:pfc rilski sporti": "2026-11-09T11:07:22.795Z",
+  "t:steaua bucharest": "2026-11-10T08:53:24.103Z",
   "t:u magdalena": "2026-11-09T18:45:34.365Z",
   "t:west brom u21": "2026-11-09T11:07:29.437Z"
  }
