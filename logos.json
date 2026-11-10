@@ -1,19 +1,26 @@
 {
- "updated": "2026-11-09T18:45:34.365Z",
+ "updated": "2026-11-10T01:48:26.112Z",
  "quota": {
-  "day": "2026-11-09",
-  "used": 24
+  "day": "2026-11-10",
+  "used": 8
  },
  "teams": {
   "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
   "botosani": "https://media.api-sports.io/football/teams/2581.png",
   "bromley u21": "https://media.api-sports.io/football/teams/24846.png",
+  "club brugge": "https://media.api-sports.io/football/teams/569.png",
   "cska sofia ii": "https://media.api-sports.io/football/teams/1415.png",
+  "djurgardens if": "https://media.api-sports.io/football/teams/364.png",
+  "eastern sc": "https://media.api-sports.io/football/teams/4451.png",
   "example fc": "https://media.api-sports.io/football/teams/42.png",
   "fc suhareka": "https://media.api-sports.io/football/teams/22817.png",
   "hapoel acre": "https://media.api-sports.io/football/teams/4482.png",
+  "hong kong fc": "https://media.api-sports.io/football/teams/4462.png",
+  "metlaoui": "https://media.api-sports.io/football/teams/984.png",
   "otelul": "https://media.api-sports.io/football/teams/6886.png",
-  "rilski sportist": "https://media.api-sports.io/football/teams/8547.png"
+  "rilski sportist": "https://media.api-sports.io/football/teams/8547.png",
+  "rsc anderlecht": "https://media.api-sports.io/football/teams/19046.png",
+  "zarzis": "https://media.api-sports.io/football/teams/989.png"
  },
  "leagues": {
   "colombia": "https://media.api-sports.io/football/leagues/241.png",
@@ -28,6 +35,7 @@
   "l:kosovo": "2026-11-09T10:48:07.105Z",
   "l:romania": "2026-11-09T10:48:33.911Z",
   "t:h akko": "2026-11-09T11:06:56.252Z",
+  "t:halmstads bk": "2026-11-10T01:48:05.930Z",
   "t:hvidovre if": "2026-11-09T18:44:53.903Z",
   "t:ind valle del cauca": "2026-11-09T18:45:27.603Z",
   "t:ironi modiin": "2026-11-09T11:06:49.613Z",
