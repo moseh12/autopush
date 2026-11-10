@@ -7,6 +7,9 @@
       "win",
       "winner"
     ],
+    "revealVipResults": false,
+    "vipNewBody": "Unlock VIP in the app to view today's predictions 🔒",
+    "vipWonBody": "Our VIP tip just WON 💰 Join VIP for the next one 👑",
     "daily": {
       "title": "🔥 Today's tips are ready",
       "body": "Fresh free and VIP predictions are live. Tap to see them before kick-off.",

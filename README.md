@@ -6,8 +6,10 @@ Firebase project on its own:
 
 | Event | Push |
 |---|---|
-| New tips appear on an endpoint | ⚽ 2 new tips in Free Sure Tips: *Man City vs Leeds · Home Win @ 1.40 + 1 more · Free* |
-| A tip's status changes to `won` | ✅ 2 tips WON! *Arsenal vs Chelsea · Over 2.5 @ 1.85 and 1 more · total odds 3.15 💰* |
+| New tips appear on a free endpoint | ⚽ 2 new tips in Free Sure Tips: *Man City vs Leeds · Home Win @ 1.40 + 1 more · Free* |
+| New tips appear on a VIP endpoint | 👑 2 new VIP tips in Score Vision: *Unlock VIP in the app to view today's predictions 🔒* |
+| A free tip's status changes to `won` | ✅ 2 tips WON! *Arsenal vs Chelsea · Over 2.5 @ 1.85 and 1 more · total odds 3.15 💰* |
+| A VIP tip's status changes to `won` | ✅ WON — Platinum Vault: *Our VIP tip just WON 💰 Join VIP for the next one 👑* |
 | 09:00 Nairobi every day | 🔥 Today's tips are ready |
 
 Tips found in the same check are grouped into one push per category, so posting 10 tips sends one notification.
@@ -45,6 +47,26 @@ Optional per endpoint: `"notify": ["new"]` sends only new-tip pushes, and `"noti
 ### 5. Test
 Repo → **Actions → Auto push notifications → Run workflow**, mode `test`. Every enabled app should get
 "✅ notifications work". Then run it once with mode `poll` to save the baseline. After that it runs on its own.
+
+## VIP privacy
+Pushes for VIP endpoints never show teams, predictions or odds. They only say that new VIP tips are up,
+so the picks stay inside the app for paying users.
+
+An endpoint counts as VIP when it has `"screen": "vip"`, `"vip": true`, or "vip" in its label or path.
+Add `"vip": false` to force an endpoint public.
+
+Settings in `apps.json` (under `defaults`, or inside one app to override):
+- `revealVipResults`: `false` (default) hides the match in VIP win pushes. Set `true` to show finished VIP matches as proof.
+- `vipNewBody`: text for new VIP tips
+- `vipWonBody`: text for a VIP win when the match is hidden
+
+Pushes carry `data.vip` (`"true"`/`"false"`) and `data.type` (`new_tips`, `vip_tips`, `result`, `daily`, `test`).
+
+Check what would be sent without sending anything:
+```
+DRY_RUN=1 node autopush.mjs
+```
+On Windows PowerShell: `$env:DRY_RUN=1; node autopush.mjs`. A dry run updates `state.json`, so don't commit that file afterwards.
 
 ## Each app must subscribe to the topic
 Pushes go to the topic **`all`** in each Firebase project. CashScore Tips already does this (`lib/notifications/notification_service.dart`).

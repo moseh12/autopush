@@ -13,6 +13,13 @@
 //   STATE_FILE            default ./state.json
 //   CONFIG_FILE           default ./apps.json
 //   ONLY_APP              limit to one app id (handy for "test")
+//
+// VIP privacy: pushes for VIP endpoints never include teams, predictions or odds.
+//   An endpoint is VIP when it has "vip": true, "screen": "vip", or "vip" in its label/path.
+//   apps.json (defaults or per app):
+//     "revealVipResults": false   true = show match details when a VIP tip WINS
+//     "vipNewBody":  "..."         text for new VIP tips
+//     "vipWonBody":  "..."         text for a VIP win (when not revealed)
 
 import { createHash, createSign } from 'node:crypto';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -92,14 +99,23 @@ async function poll() {
       if (notify.includes('new')) {
         const fresh = tips.filter((t) => !(tipKey(t) in previous));
         if (fresh.length) {
-          const vip = ep.screen === 'vip';
-          const title = fresh.length === 1
-            ? `⚽ New tip in ${ep.label}`
-            : `⚽ ${fresh.length} new tips in ${ep.label}`;
-          const body = describe(fresh[0]) + (fresh.length > 1 ? ` + ${fresh.length - 1} more` : '') +
-            (vip ? ' · VIP 👑' : ' · Free');
+          const vip = isVip(ep);
+          let title, body;
+          if (vip) {
+            // VIP: never reveal teams, prediction or odds — only that tips exist.
+            title = fresh.length === 1
+              ? `👑 New VIP tip in ${ep.label}`
+              : `👑 ${fresh.length} new VIP tips in ${ep.label}`;
+            body = app.vipNewBody ?? defaults.vipNewBody ?? 'Unlock VIP in the app to view today\'s predictions 🔒';
+          } else {
+            title = fresh.length === 1
+              ? `⚽ New tip in ${ep.label}`
+              : `⚽ ${fresh.length} new tips in ${ep.label}`;
+            body = describe(fresh[0]) + (fresh.length > 1 ? ` + ${fresh.length - 1} more` : '') + ' · Free';
+          }
           await push(app, title, body, {
-            type: 'new_tips', screen: ep.screen || 'free', category: ep.label,
+            type: vip ? 'vip_tips' : 'new_tips', vip: vip ? 'true' : 'false',
+            screen: ep.screen || 'free', category: ep.label,
             count: fresh.length, tag: `new_${ep.path}`,
           }, ep.image);
         }
@@ -110,25 +126,38 @@ async function poll() {
           const k = tipKey(t);
           const now = current[k];
           if (wonStatuses.includes(now) && k in previous && previous[k] !== now) {
-            wins.push({ tip: t, label: ep.label });
+            wins.push({ tip: t, label: ep.label, vip: isVip(ep) });
           }
         }
       }
     }
 
     if (wins.length) {
-      const first = wins[0];
+      // Show match details only for free wins (or VIP wins if revealVipResults is on).
+      const reveal = app.revealVipResults ?? defaults.revealVipResults ?? false;
+      const showable = wins.filter((w) => !w.vip || reveal);
+      const anyVip = wins.some((w) => w.vip);
+      const first = showable[0];
+
+      const odds = wins.map((w) => parseFloat(String(w.tip.odds_value ?? '').replace(',', '.')));
+      const total = odds.every((o) => o > 0) ? ` · total odds ${odds.reduce((a, b) => a * b, 1).toFixed(2)}` : '';
+
+      let title, body;
       if (wins.length === 1) {
-        await push(app, `✅ WON — ${first.label}`, `${describe(first.tip)} 💰`, {
-          type: 'result', screen: 'proof', category: first.label, tag: 'won',
-        });
+        title = `✅ WON — ${wins[0].label}`;
+        body = first ? `${describe(first.tip)} 💰` : (app.vipWonBody ?? defaults.vipWonBody ?? 'Our VIP tip just WON 💰 Join VIP for the next one 👑');
       } else {
-        const odds = wins.map((w) => parseFloat(String(w.tip.odds_value ?? '').replace(',', '.')));
-        const total = odds.every((o) => o > 0) ? ` · total odds ${odds.reduce((a, b) => a * b, 1).toFixed(2)}` : '';
-        await push(app, `✅ ${wins.length} tips WON!`, `${describe(first.tip)} and ${wins.length - 1} more${total} 💰`, {
-          type: 'result', screen: 'proof', count: wins.length, tag: 'won',
-        });
+        title = `✅ ${wins.length} tips WON!`;
+        body = first
+          ? `${describe(first.tip)} and ${wins.length - 1} more${total} 💰`
+          : `${wins.length} VIP tips WON${total} 💰 Join VIP 👑`;
       }
+
+      await push(app, title, body, {
+        type: 'result', vip: anyVip ? 'true' : 'false', screen: 'proof',
+        category: wins.length === 1 ? wins[0].label : undefined,
+        count: wins.length, tag: 'won',
+      });
     }
   }
 }
@@ -146,6 +175,14 @@ function tipKey(t) {
   if (t.id != null) return `id:${t.id}`;
   const raw = [t.date, t.time, t.team_one, t.team_two, t.tips_name, t.category].map((v) => String(v ?? '').trim().toLowerCase()).join('|');
   return createHash('sha1').update(raw).digest('hex').slice(0, 16);
+}
+
+// An endpoint is VIP if apps.json marks it with "vip": true, "screen": "vip",
+// or its label contains "VIP". Set "vip": false to force an endpoint public.
+function isVip(ep) {
+  if (ep.vip === true) return true;
+  if (ep.vip === false) return false;
+  return ep.screen === 'vip' || /vip/i.test(ep.label || '') || /vip/i.test(ep.path || '');
 }
 
 function describe(t) {
