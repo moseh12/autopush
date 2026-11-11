@@ -1,13 +1,15 @@
 {
- "updated": "2026-11-11T02:00:11.013Z",
+ "updated": "2026-11-11T09:15:33.808Z",
  "quota": {
   "day": "2026-11-11",
-  "used": 8
+  "used": 16
  },
  "teams": {
   "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
   "altamura": "https://media.api-sports.io/football/teams/9549.png",
   "atletico tucuman": "https://media.api-sports.io/football/teams/455.png",
+  "avro": "https://media.api-sports.io/football/teams/8690.png",
+  "barnsley": "https://media.api-sports.io/football/teams/747.png",
   "boca juniors": "https://media.api-sports.io/football/teams/451.png",
   "boston river": "https://media.api-sports.io/football/teams/2361.png",
   "botosani": "https://media.api-sports.io/football/teams/2581.png",
@@ -15,6 +17,7 @@
   "bromley u21": "https://media.api-sports.io/football/teams/24846.png",
   "cavese": "https://media.api-sports.io/football/teams/1712.png",
   "cerro largo": "https://media.api-sports.io/football/teams/2369.png",
+  "cieza": "https://media.api-sports.io/football/teams/20277.png",
   "club brugge": "https://media.api-sports.io/football/teams/569.png",
   "cska sofia ii": "https://media.api-sports.io/football/teams/1415.png",
   "djurgardens if": "https://media.api-sports.io/football/teams/364.png",
@@ -29,6 +32,7 @@
   "hemel hempstead": "https://media.api-sports.io/football/teams/8660.png",
   "hong kong fc": "https://media.api-sports.io/football/teams/4462.png",
   "hull city": "https://media.api-sports.io/football/teams/64.png",
+  "jablonec": "https://media.api-sports.io/football/teams/1122.png",
   "jaguar": "https://media.api-sports.io/football/teams/1133.png",
   "liverpool": "https://media.api-sports.io/football/teams/40.png",
   "manta": "https://media.api-sports.io/football/teams/1980.png",
@@ -38,6 +42,7 @@
   "mo bejaia": "https://media.api-sports.io/football/teams/920.png",
   "nezla": "https://media.api-sports.io/football/teams/20696.png",
   "northampton": "https://media.api-sports.io/football/teams/1337.png",
+  "oldham": "https://media.api-sports.io/football/teams/1349.png",
   "otelul": "https://media.api-sports.io/football/teams/6886.png",
   "pineto": "https://media.api-sports.io/football/teams/9514.png",
   "rilski sportist": "https://media.api-sports.io/football/teams/8547.png",
@@ -47,6 +52,7 @@
   "torquay": "https://media.api-sports.io/football/teams/1827.png",
   "vera cruz": "https://media.api-sports.io/football/teams/16446.png",
   "vis pesaro": "https://media.api-sports.io/football/teams/1708.png",
+  "whitby": "https://media.api-sports.io/football/teams/7757.png",
   "york city": "https://media.api-sports.io/football/teams/1604.png",
   "zarzis": "https://media.api-sports.io/football/teams/989.png"
  },
@@ -62,6 +68,7 @@
   "l:italy": "2026-11-09T10:48:47.308Z",
   "l:kosovo": "2026-11-09T10:48:07.105Z",
   "l:romania": "2026-11-09T10:48:33.911Z",
+  "t:artis brno": "2026-11-11T09:15:27.106Z",
   "t:ca union santa fe reserve": "2026-11-10T16:54:38.485Z",
   "t:h akko": "2026-11-09T11:06:56.252Z",
   "t:halmstads bk": "2026-11-10T01:48:05.930Z",
@@ -74,6 +81,7 @@
   "t:real sociedad b": "2026-11-11T01:59:44.196Z",
   "t:steaua bucharest": "2026-11-10T08:53:24.103Z",
   "t:u magdalena": "2026-11-09T18:45:34.365Z",
+  "t:valencia b": "2026-11-11T09:15:20.377Z",
   "t:west brom u21": "2026-11-09T11:07:29.437Z"
  }
 }
