@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: "*/10 * * * *"   # check for new / won tips every 10 min (GitHub may delay a few minutes)
     - cron: "0 6 * * *"      # 06:00 UTC = 09:00 Nairobi — daily "tips are ready" reminder
+  repository_dispatch:
+    types: [tips-updated]   # backend calls this right after a tip is posted / marked won
   workflow_dispatch:
     inputs:
       mode:

@@ -3,7 +3,7 @@
 // Every run (GitHub Actions cron):
 //   1. fetches each app's tip endpoints from the shared API
 //   2. compares with state.json from the previous run
-//   3. sends ONE grouped push per endpoint for new tips, and one per app for tips that just WON
+//   3. sends ONE grouped push per endpoint (section) for new tips, and one per section for tips that just WON
 //   4. writes the new state.json (the workflow commits it back)
 //
 // Env:
@@ -13,6 +13,10 @@
 //   STATE_FILE            default ./state.json
 //   CONFIG_FILE           default ./apps.json
 //   ONLY_APP              limit to one app id (handy for "test")
+//
+// Instant runs: besides the cron, the workflow also runs on a `repository_dispatch`
+// event (type "tips-updated"). Your backend calls it right after a tip changes,
+// so the congratulations push goes out in about a minute.
 //
 // VIP privacy: pushes for VIP endpoints never include teams, predictions or odds.
 //   An endpoint is VIP when it has "vip": true, "screen": "vip", or "vip" in its label/path.
@@ -70,7 +74,6 @@ async function poll() {
   for (const app of apps) {
     const appState = (state[app.id] ??= {});
     const wonStatuses = (app.wonStatuses || defaults.wonStatuses || ['won']).map((s) => s.toLowerCase());
-    const wins = [];
 
     for (const ep of app.endpoints) {
       const url = `${(app.baseUrl || defaults.baseUrl).replace(/\/$/, '')}/${ep.path.replace(/^\//, '')}`;
@@ -122,44 +125,44 @@ async function poll() {
       }
 
       if (notify.includes('won')) {
-        for (const t of tips) {
+        const wins = tips.filter((t) => {
           const k = tipKey(t);
-          const now = current[k];
-          if (wonStatuses.includes(now) && k in previous && previous[k] !== now) {
-            wins.push({ tip: t, label: ep.label, vip: isVip(ep) });
-          }
-        }
+          return wonStatuses.includes(current[k]) && k in previous && previous[k] !== current[k];
+        });
+        if (wins.length) await pushWins(app, ep, wins);
       }
-    }
-
-    if (wins.length) {
-      // Show match details only for free wins (or VIP wins if revealVipResults is on).
-      const reveal = app.revealVipResults ?? defaults.revealVipResults ?? false;
-      const showable = wins.filter((w) => !w.vip || reveal);
-      const anyVip = wins.some((w) => w.vip);
-      const first = showable[0];
-
-      const odds = wins.map((w) => parseFloat(String(w.tip.odds_value ?? '').replace(',', '.')));
-      const total = odds.every((o) => o > 0) ? ` · total odds ${odds.reduce((a, b) => a * b, 1).toFixed(2)}` : '';
-
-      let title, body;
-      if (wins.length === 1) {
-        title = `✅ WON — ${wins[0].label}`;
-        body = first ? `${describe(first.tip)} 💰` : (app.vipWonBody ?? defaults.vipWonBody ?? 'Our VIP tip just WON 💰 Join VIP for the next one 👑');
-      } else {
-        title = `✅ ${wins.length} tips WON!`;
-        body = first
-          ? `${describe(first.tip)} and ${wins.length - 1} more${total} 💰`
-          : `${wins.length} VIP tips WON${total} 💰 Join VIP 👑`;
-      }
-
-      await push(app, title, body, {
-        type: 'result', vip: anyVip ? 'true' : 'false', screen: 'proof',
-        category: wins.length === 1 ? wins[0].label : undefined,
-        count: wins.length, tag: 'won',
-      });
     }
   }
+}
+
+// One congratulations push per section, with that section's total odds.
+async function pushWins(app, ep, wins) {
+  const vip = isVip(ep);
+  const reveal = app.revealVipResults ?? defaults.revealVipResults ?? false;
+  const hide = vip && !reveal;
+
+  const odds = wins.map((t) => parseFloat(String(t.odds_value ?? '').replace(',', '.')));
+  const total = odds.every((o) => o > 0) ? odds.reduce((a, b) => a * b, 1).toFixed(2) : null;
+
+  let title, body;
+  if (wins.length === 1) {
+    title = `🎉 Congratulations! ${ep.label} WON ✅`;
+    body = hide
+      ? (app.vipWonBody ?? defaults.vipWonBody ?? 'Our VIP tip just WON 💰 Join VIP for the next one 👑')
+      : `${describe(wins[0])} 💰 Cash out and enjoy!`;
+  } else {
+    title = `🎉 Congratulations! ${ep.label} — ${wins.length} tips WON ✅`;
+    const odd = total ? ` · total odds ${total}` : '';
+    body = hide
+      ? `${wins.length} VIP tips WON${odd} 💰 Join VIP 👑`
+      : `${describe(wins[0])} and ${wins.length - 1} more${odd} 💰`;
+  }
+
+  await push(app, title, body, {
+    type: 'result', vip: vip ? 'true' : 'false', screen: 'proof',
+    category: ep.label, count: wins.length, total_odds: total ?? undefined,
+    tag: `won_${ep.path}`, // per section, so one section's push doesn't replace another's
+  });
 }
 
 async function fetchTips(url) {
