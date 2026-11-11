@@ -44,11 +44,28 @@ const accounts = loadAccounts();
 const state = existsSync(STATE_FILE) ? JSON.parse(readFileSync(STATE_FILE, 'utf8') || '{}') : {};
 
 let failures = 0;
+const FORCE = process.env.FORCE === '1' || process.env.FORCE_PROMO === '1';
+
+// Nairobi-local date/hour, used so a job never sends twice for the same day/hour
+// (GitHub's timer and cron-job.org may both fire).
+function localNow(offset = 3) {
+  const d = new Date(Date.now() + offset * 3600000);
+  return { date: d.toISOString().slice(0, 10), hour: d.getUTCHours() };
+}
+function firstTime(key, id) {
+  state._sent ??= {};
+  if (state._sent[key] === id && !FORCE) {
+    console.log(`${key}: already sent for ${id} — skipped`);
+    return false;
+  }
+  state._sent[key] = id;
+  return true;
+}
 const tokenCache = new Map(); // must be declared before main runs (top-level await)
 
 // ---------------------------------------------------------------- main
 if (MODE === 'daily') {
-  for (const app of apps) {
+  if (firstTime('daily', localNow().date)) for (const app of apps) {
     const d = { ...defaults.daily, ...app.daily };
     await push(app, d.title, d.body, { type: 'daily', screen: d.screen, tag: 'daily_reminder' });
   }
@@ -64,8 +81,8 @@ if (MODE === 'daily') {
   }
 } else {
   await poll();
-  writeFileSync(STATE_FILE, JSON.stringify(state, null, 1) + '\n');
 }
+if (MODE !== 'test') writeFileSync(STATE_FILE, JSON.stringify(state, null, 1) + '\n');
 
 if (failures) {
   console.error(`${failures} push(es) failed`);
@@ -195,6 +212,7 @@ function offers() { return {
 async function offer(kind) {
   const base = offers()[kind];
   const cfg = { ...(defaults[kind] || {}) };
+  if (!firstTime(kind, localNow().date)) return;
   const day = Math.floor(Date.now() / 86400000); // changes every day
   for (const [i, app] of apps.entries()) {
     const c = { ...cfg, ...(app[kind] || {}) };
@@ -234,6 +252,7 @@ async function promo() {
   const quiet = qStart > qEnd ? hour >= qStart || hour < qEnd : hour >= qStart && hour < qEnd;
   if (quiet && process.env.FORCE_PROMO !== '1') return console.log(`promo skipped: quiet hours (${hour}:00 local)`);
   if (hour === (cfg.skipHour ?? 16) && process.env.FORCE_PROMO !== '1') return console.log('promo skipped: discount offer goes out this hour');
+  if (!firstTime('promo', `${localNow(offset).date} ${hour}h`)) return;
 
   const slot = Math.floor(Date.now() / 3600000); // changes every hour
   for (const [i, app] of apps.entries()) {

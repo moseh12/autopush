@@ -6,8 +6,8 @@ on:
     - cron: "0 6 * * *"      # 06:00 UTC = 09:00 Nairobi — daily "tips are ready" reminder
     - cron: "0 13 * * *"     # 13:00 UTC = 16:00 Nairobi — 30% OFF VIP offer
     - cron: "0 21 * * *"     # 21:00 UTC = 00:00 Nairobi — 50% cashback offer
-  repository_dispatch:
-    types: [tips-updated]   # backend calls this right after a tip is posted / marked won
+  repository_dispatch:     # cron-job.org triggers these on time (GitHub's own timer is unreliable)
+    types: [hourly, daily, discount, cashback, tips-updated]
   workflow_dispatch:
     inputs:
       mode:
@@ -40,12 +40,13 @@ jobs:
         if: github.event.inputs.mode != 'promo'
         env:
           FCM_SERVICE_ACCOUNTS: ${{ secrets.FCM_SERVICE_ACCOUNTS }}
-          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 6 * * *' && 'daily') || (github.event.schedule == '0 13 * * *' && 'discount') || (github.event.schedule == '0 21 * * *' && 'cashback') || 'poll' }}
+          MODE: ${{ github.event.inputs.mode || (github.event_name == 'repository_dispatch' && contains(fromJSON('["daily","discount","cashback"]'), github.event.action) && github.event.action) || (github.event.schedule == '0 6 * * *' && 'daily') || (github.event.schedule == '0 13 * * *' && 'discount') || (github.event.schedule == '0 21 * * *' && 'cashback') || 'poll' }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
           ONLY_APP: ${{ github.event.inputs.only_app }}
         run: node autopush.mjs
 
       - name: Hourly VIP promo
-        if: always() && (github.event.inputs.mode == 'promo' || (github.event_name == 'schedule' && github.event.schedule == '0 * * * *'))
+        if: always() && (github.event.inputs.mode == 'promo' || (github.event_name == 'schedule' && github.event.schedule == '0 * * * *') || (github.event_name == 'repository_dispatch' && github.event.action == 'hourly'))
         env:
           FCM_SERVICE_ACCOUNTS: ${{ secrets.FCM_SERVICE_ACCOUNTS }}
           MODE: promo
@@ -54,7 +55,7 @@ jobs:
         run: node autopush.mjs
 
       - name: Update team & league logos
-        if: always() && (github.event.inputs.mode == 'poll' || (github.event_name == 'schedule' && github.event.schedule == '0 * * * *'))
+        if: always() && (github.event.inputs.mode == 'poll' || (github.event_name == 'schedule' && github.event.schedule == '0 * * * *') || (github.event_name == 'repository_dispatch' && github.event.action == 'hourly'))
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: node logos.mjs
