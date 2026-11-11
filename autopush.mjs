@@ -8,7 +8,7 @@
 //
 // Env:
 //   FCM_SERVICE_ACCOUNTS  JSON object { "<app id>": <service-account json>, ... }  (GitHub secret)
-//   MODE                  "poll" (default) | "daily" | "test"
+//   MODE                  "poll" (default) | "daily" | "test" | "promo" (hourly Join-VIP push) | "discount" (4 PM) | "cashback" (midnight)
 //   DRY_RUN=1             print messages instead of sending
 //   STATE_FILE            default ./state.json
 //   CONFIG_FILE           default ./apps.json
@@ -24,6 +24,7 @@
 //     "revealVipResults": false   true = show match details when a VIP tip WINS
 //     "vipNewBody":  "..."         text for new VIP tips
 //     "vipWonBody":  "..."         text for a VIP win (when not revealed)
+//     "image": "https://..."      color logo shown in every push of that app (Android small icon is always one color)
 
 import { createHash, createSign } from 'node:crypto';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -51,6 +52,10 @@ if (MODE === 'daily') {
     const d = { ...defaults.daily, ...app.daily };
     await push(app, d.title, d.body, { type: 'daily', screen: d.screen, tag: 'daily_reminder' });
   }
+} else if (MODE === 'promo') {
+  await promo();
+} else if (MODE === 'discount' || MODE === 'cashback') {
+  await offer(MODE);
 } else if (MODE === 'test') {
   for (const app of apps) {
     await push(app, `✅ ${app.name}: notifications work`, 'This is a test push from GitHub Actions.', {
@@ -165,6 +170,101 @@ async function pushWins(app, ep, wins) {
   });
 }
 
+// ---------------------------------------------------------------- daily VIP offers
+// "discount": 16:00 Nairobi (30% off)     "cashback": 00:00 Nairobi (50% cashback)
+// Placeholders: {app} {percent}. One message per day, rotating.
+function offers() { return {
+  discount: {
+    percent: 30,
+    messages: [
+      { title: '🎁 {percent}% OFF VIP — today only', body: 'Join VIP now and save {percent}% on today\'s premium picks. Tap to claim before it ends ⏳' },
+      { title: '🔥 VIP flash sale: {percent}% OFF', body: 'All VIP plans are {percent}% off right now. Don\'t miss tonight\'s games 👑' },
+      { title: '💎 {percent}% OFF VIP access', body: 'Unlock correct scores, HT/FT and big-odds picks for less. Offer ends soon ⏳' },
+    ],
+  },
+  cashback: {
+    percent: 50,
+    messages: [
+      { title: '💸 Instant {percent}% cashback', body: 'Subscribe now for instant {percent}% cashback 💰 Join VIP in {app} tonight.' },
+      { title: '🌙 Midnight cashback is live', body: 'Subscribe now for instant {percent}% cashback on VIP 💸 Tap to join.' },
+      { title: '💰 Get {percent}% back instantly', body: 'Subscribe now for instant {percent}% cashback and unlock today\'s VIP tips 👑' },
+    ],
+  },
+}; }
+
+async function offer(kind) {
+  const base = offers()[kind];
+  const cfg = { ...(defaults[kind] || {}) };
+  const day = Math.floor(Date.now() / 86400000); // changes every day
+  for (const [i, app] of apps.entries()) {
+    const c = { ...cfg, ...(app[kind] || {}) };
+    if (c.enabled === false) continue;
+    const list = c.messages || base.messages;
+    const msg = list[(day + i) % list.length];
+    const vars = { app: app.name, percent: c.percent ?? base.percent };
+    const fill = (t) => t.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
+    await push(app, fill(msg.title), fill(msg.body), {
+      type: kind, vip: 'true', screen: c.screen || 'vip',
+      percent: vars.percent, tag: `vip_${kind}`,
+    }, msg.image || c.image);
+  }
+}
+
+// ---------------------------------------------------------------- hourly VIP promo
+// Rotating "Join VIP" messages. Placeholders: {app} {vipCount} {vipWon}.
+// A message using {vipCount}/{vipWon} is skipped when that number is 0.
+function defaultPromo() { return [
+  { title: '👑 VIP tips are live', body: '{vipCount} premium picks are waiting in VIP today. Unlock them before kick-off ⏰' },
+  { title: '🔥 VIP members are winning', body: '{vipWon} VIP tips already WON 💰 Don\'t miss the next one — join VIP now.' },
+  { title: '💎 Bigger odds live in VIP', body: 'Correct scores, HT/FT and high-odds picks are for VIP members only. Join today 👑' },
+  { title: '⏳ Kick-off is getting close', body: 'Today\'s VIP picks are ready. Join VIP and go into the games with confidence.' },
+  { title: '🏆 Stop guessing, start winning', body: 'Our analysts did the research for you. Unlock today\'s VIP predictions 🔓' },
+  { title: '🎯 The best picks are in VIP', body: 'Every VIP pick, every day, straight in {app}. Tap to unlock 🔓' },
+  { title: '💰 Small stakes, big odds', body: 'VIP accumulators with total odds you won\'t find in free tips. Join VIP now 👑' },
+]; }
+
+async function promo() {
+  const cfg = { ...(defaults.promo || {}) };
+  if (cfg.enabled === false) return console.log('promo disabled');
+
+  // Quiet hours in local time (default Nairobi UTC+3, no pushes 22:00–07:59).
+  const offset = cfg.utcOffset ?? 3;
+  const hour = (new Date().getUTCHours() + offset + 24) % 24;
+  const [qStart, qEnd] = cfg.quietHours ?? [22, 8];
+  const quiet = qStart > qEnd ? hour >= qStart || hour < qEnd : hour >= qStart && hour < qEnd;
+  if (quiet && process.env.FORCE_PROMO !== '1') return console.log(`promo skipped: quiet hours (${hour}:00 local)`);
+  if (hour === (cfg.skipHour ?? 16) && process.env.FORCE_PROMO !== '1') return console.log('promo skipped: discount offer goes out this hour');
+
+  const slot = Math.floor(Date.now() / 3600000); // changes every hour
+  for (const [i, app] of apps.entries()) {
+    const appCfg = { ...cfg, ...(app.promo || {}) };
+    if (appCfg.enabled === false) continue;
+
+    // Counts from the last poll (state.json) — no extra API calls.
+    let vipCount = 0, vipWon = 0;
+    const wonStatuses = (app.wonStatuses || defaults.wonStatuses || ['won']).map((x) => x.toLowerCase());
+    for (const ep of app.endpoints) {
+      if (!isVip(ep)) continue;
+      const tips = Object.values(state[app.id]?.[ep.path] || {});
+      vipCount += tips.length;
+      vipWon += tips.filter((st) => wonStatuses.includes(st)).length;
+    }
+
+    const vars = { app: app.name, vipCount, vipWon };
+    const list = (appCfg.messages || defaultPromo()).filter((m) =>
+      !(/\{vipCount\}/.test(m.title + m.body) && !vipCount) &&
+      !(/\{vipWon\}/.test(m.title + m.body) && !vipWon));
+    if (!list.length) continue;
+
+    const msg = list[(slot + i) % list.length];
+    const fill = (t) => t.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
+    await push(app, fill(msg.title), fill(msg.body), {
+      type: 'promo', vip: 'true', screen: 'vip',
+      tag: 'vip_promo', // replaces the previous promo, so the tray isn't flooded
+    }, msg.image || appCfg.image);
+  }
+}
+
 async function fetchTips(url) {
   const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(20000) });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -203,6 +303,8 @@ function loadAccounts() {
 
 async function push(app, title, body, data = {}, image) {
   const android = app.android || {};
+  // Full-color logo/banner shown in the notification (https URL). Endpoint image wins.
+  image = image || app.image || defaults.image;
   const strData = Object.fromEntries(
     Object.entries({ ...data, title, body, click_action: 'FLUTTER_NOTIFICATION_CLICK' })
       .filter(([, v]) => v != null)
@@ -229,7 +331,7 @@ async function push(app, title, body, data = {}, image) {
   };
 
   if (DRY_RUN) {
-    console.log(`[DRY ${app.id}] ${title}\n            ${body}\n            ${JSON.stringify(strData)}`);
+    console.log(`[DRY ${app.id}] ${title}\n            ${body}${image ? `\n            image: ${image}` : ''}\n            ${JSON.stringify(strData)}`);
     return;
   }
 
