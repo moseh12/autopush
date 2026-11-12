@@ -7,15 +7,15 @@
   },
   "over-tips": {},
   "daily-tips": {
-   "id:13973": "pending",
-   "id:13974": "pending"
+   "id:13973": "win",
+   "id:13974": "win"
   },
   "htft-tips": {
-   "id:13975": "pending",
-   "id:13976": "pending"
+   "id:13975": "win",
+   "id:13976": "win"
   },
   "draws-tips": {
-   "id:13977": "pending",
+   "id:13977": "win",
    "id:13978": "pending"
   },
   "premium-tips": {
@@ -23,9 +23,9 @@
    "id:13980": "pending"
   },
   "special-tips": {
-   "id:13992": "pending",
-   "id:13993": "pending",
-   "id:13994": "pending"
+   "id:13992": "win",
+   "id:13993": "win",
+   "id:13994": "win"
   }
  },
  "_sent": {
