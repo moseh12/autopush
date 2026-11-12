@@ -1,8 +1,8 @@
 {
  "cashscoretips": {
   "sure-tips": {
-   "id:13970": "pending",
-   "id:13971": "pending",
+   "id:13970": "win",
+   "id:13971": "win",
    "id:13972": "pending"
   },
   "over-tips": {},
@@ -32,6 +32,6 @@
   "discount": "2026-11-11",
   "cashback": "2026-11-12",
   "daily": "2026-11-12",
-  "promo": "2026-11-12 12h"
+  "promo": "2026-11-12 20h"
  }
 }
