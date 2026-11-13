@@ -7,8 +7,8 @@
    "id:14019": "pending"
   },
   "daily-tips": {
-   "id:14014": "pending",
-   "id:14017": "pending"
+   "id:14014": "win",
+   "id:14017": "win"
   },
   "htft-tips": {
    "id:14005": "pending",
@@ -61,6 +61,9 @@
   ],
   "cashscoretips:cashback": [
    "161bb26a"
+  ],
+  "cashscoretips:wonVipMany": [
+   "4ee68a15"
   ]
  }
 }
