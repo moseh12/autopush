@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-13T10:46:02.292Z",
+ "updated": "2026-11-13T11:01:06.750Z",
  "quota": {
   "day": "2026-11-13",
-  "used": 56
+  "used": 64
  },
  "teams": {
   "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
@@ -17,12 +17,15 @@
   "altamura": "https://media.api-sports.io/football/teams/9549.png",
   "andorra": "https://media.api-sports.io/football/teams/1110.png",
   "apia leichhardt": "https://media.api-sports.io/football/teams/3764.png",
+  "arba": "https://media.api-sports.io/football/teams/4126.png",
   "argentinos junior": "https://media.api-sports.io/football/teams/18677.png",
   "as kayes": "https://media.api-sports.io/football/teams/28593.png",
   "atenas": "https://media.api-sports.io/football/teams/2364.png",
   "atletico tucuman": "https://media.api-sports.io/football/teams/455.png",
   "avro": "https://media.api-sports.io/football/teams/8690.png",
   "babrungas": "https://media.api-sports.io/football/teams/14382.png",
+  "bangladesh": "https://media.api-sports.io/football/teams/1560.png",
+  "bansko": "https://media.api-sports.io/football/teams/1407.png",
   "barnsley": "https://media.api-sports.io/football/teams/747.png",
   "benfica w": "https://media.api-sports.io/football/teams/15495.png",
   "boca juniors": "https://media.api-sports.io/football/teams/451.png",
@@ -122,10 +125,12 @@
   "sabadell": "https://media.api-sports.io/football/teams/9593.png",
   "sheffield wednesday": "https://media.api-sports.io/football/teams/74.png",
   "sierra leone": "https://media.api-sports.io/football/teams/1499.png",
+  "sri lanka": "https://media.api-sports.io/football/teams/5166.png",
   "sweden": "https://media.api-sports.io/football/teams/5.png",
   "tacuarembo": "https://media.api-sports.io/football/teams/2374.png",
   "tecnico u": "https://media.api-sports.io/football/teams/1151.png",
   "tersana": "https://media.api-sports.io/football/teams/15739.png",
+  "tlemcen": "https://media.api-sports.io/football/teams/928.png",
   "torquay": "https://media.api-sports.io/football/teams/1827.png",
   "treowen": "https://media.api-sports.io/football/teams/11309.png",
   "united arab emirates": "https://media.api-sports.io/football/teams/1563.png",
@@ -152,6 +157,7 @@
   "l:italy": "2026-11-09T10:48:47.308Z",
   "l:kosovo": "2026-11-09T10:48:07.105Z",
   "l:romania": "2026-11-09T10:48:33.911Z",
+  "t:arab contractors": "2026-11-13T11:01:00.071Z",
   "t:artis brno": "2026-11-11T09:15:27.106Z",
   "t:austria vienna w": "2026-11-13T10:15:49.899Z",
   "t:bishop s stortford": "2026-11-12T01:48:25.302Z",
@@ -159,6 +165,7 @@
   "t:ca barracas": "2026-11-12T23:03:52.317Z",
   "t:ca union santa fe reserve": "2026-11-10T16:54:38.485Z",
   "t:calvo sotelo puertollano": "2026-11-12T17:51:00.273Z",
+  "t:djilel": "2026-11-13T11:01:06.750Z",
   "t:el mansoura": "2026-11-13T09:45:52.478Z",
   "t:gyeongju khnp": "2026-11-12T17:50:26.155Z",
   "t:gyeongju women": "2026-11-12T09:04:50.401Z",
@@ -170,6 +177,7 @@
   "t:ind valle del cauca": "2026-11-09T18:45:27.603Z",
   "t:ironi modiin": "2026-11-09T11:06:49.613Z",
   "t:kf ferizaj": "2026-11-09T11:07:02.913Z",
+  "t:levski ii": "2026-11-13T11:00:40.075Z",
   "t:montevideo city": "2026-11-10T22:13:24.012Z",
   "t:pfc rilski sporti": "2026-11-09T11:07:22.795Z",
   "t:pure swansea": "2026-11-13T09:45:18.272Z",
@@ -178,6 +186,7 @@
   "t:steaua bucharest": "2026-11-10T08:53:24.103Z",
   "t:u magdalena": "2026-11-09T18:45:34.365Z",
   "t:valencia b": "2026-11-11T09:15:20.377Z",
+  "t:we sc": "2026-11-13T11:01:00.071Z",
   "t:west brom u21": "2026-11-09T11:07:29.437Z"
  }
 }
