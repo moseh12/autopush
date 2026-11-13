@@ -11,8 +11,8 @@
    "id:14017": "win"
   },
   "htft-tips": {
-   "id:14005": "pending",
-   "id:14006": "pending"
+   "id:14005": "win",
+   "id:14006": "win"
   },
   "draws-tips": {
    "id:14010": "pending",
@@ -25,7 +25,7 @@
   "special-tips": {
    "id:14008": "pending",
    "id:14012": "pending",
-   "id:14013": "pending"
+   "id:14013": "win"
   }
  },
  "_sent": {
@@ -63,7 +63,11 @@
    "161bb26a"
   ],
   "cashscoretips:wonVipMany": [
+   "954a5ac7",
    "4ee68a15"
+  ],
+  "cashscoretips:wonVip": [
+   "f9601f6b"
   ]
  }
 }
