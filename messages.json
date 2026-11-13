@@ -1,0 +1,530 @@
+{
+  "_help": [
+    "Every notification wording lives here. The bot picks one at random and never repeats a wording it used recently for that app.",
+    "Add, edit or delete lines freely. Each line needs a title and a body.",
+    "Placeholders (filled in automatically): {app} {day} {greet} {part} {label} {count} {more} {match} {home} {away} {league} {time} {pick} {odds} {total} {score} {vipCount} {vipWon} {percent}",
+    "A wording is skipped automatically when one of its placeholders has no value (or is 0).",
+    "Optional per line: \"hours\": [from, to] (Nairobi time, e.g. [5, 12] = mornings), \"days\": [\"sat\",\"sun\"], \"image\": \"https://...\""
+  ],
+  "newFree": [
+    {
+      "title": "⚽ New free tip: {match}",
+      "body": "{pick} @ {odds} · {league}. Tap for the full analysis."
+    },
+    {
+      "title": "🆓 Free pick just dropped",
+      "body": "{match} — {pick} @ {odds}. Kick-off {time}."
+    },
+    {
+      "title": "🔥 Fresh tip in {label}",
+      "body": "{match}: our pick is {pick} @ {odds} ⚽"
+    },
+    {
+      "title": "📢 {label} updated",
+      "body": "New free prediction for {match}. Check it before kick-off ⏰"
+    },
+    {
+      "title": "{greet}! New free tip ⚽",
+      "body": "{match} · {pick} @ {odds}. Tap to see it."
+    },
+    {
+      "title": "🎯 Today's free pick is in",
+      "body": "{match} ({league}) — {pick} @ {odds}."
+    },
+    {
+      "title": "⚡ Don't miss this one",
+      "body": "{match} kicks off at {time}. Free pick: {pick} @ {odds}."
+    },
+    {
+      "title": "✅ {label}: new tip",
+      "body": "{match} → {pick} @ {odds}. Free in {app}."
+    },
+    {
+      "title": "👀 Have you seen this {day} tip?",
+      "body": "{match} — {pick} @ {odds}. It's free 🆓"
+    }
+  ],
+  "newFreeMany": [
+    {
+      "title": "⚽ {count} new free tips",
+      "body": "{match} — {pick} @ {odds} + {more} more in {label}."
+    },
+    {
+      "title": "🆓 {count} free picks for {day}",
+      "body": "Starting with {match} ({pick} @ {odds}). Tap to see all."
+    },
+    {
+      "title": "🔥 {label} is loaded",
+      "body": "{count} fresh predictions are live, including {match}."
+    },
+    {
+      "title": "{greet}! {count} new tips ⚽",
+      "body": "Free picks are in for {day}: {match} + {more} more."
+    },
+    {
+      "title": "📋 Your {day} free tips are here",
+      "body": "{count} matches analysed. First up: {match} — {pick}."
+    },
+    {
+      "title": "🎯 {count} free predictions just landed",
+      "body": "{match} @ {odds} and {more} more. Tap before kick-off ⏰"
+    },
+    {
+      "title": "⚡ Fresh {label} picks",
+      "body": "{count} new tips from today's games. Check them in {app}."
+    },
+    {
+      "title": "🌙 Tonight's free picks are in",
+      "body": "{count} new tips including {match}. Tap to view.",
+      "hours": [
+        16,
+        23
+      ]
+    },
+    {
+      "title": "☀️ Morning tips are ready",
+      "body": "{count} free picks for today, starting with {match}.",
+      "hours": [
+        5,
+        12
+      ]
+    }
+  ],
+  "newVip": [
+    {
+      "title": "👑 New VIP tip in {label}",
+      "body": "A fresh premium pick just dropped. Unlock VIP to see it 🔒"
+    },
+    {
+      "title": "🔒 {label}: new pick",
+      "body": "Our analysts just posted a VIP selection. Tap to unlock it."
+    },
+    {
+      "title": "💎 VIP update",
+      "body": "A new {label} tip is live. VIP members already see it 👀"
+    },
+    {
+      "title": "⚡ Fresh VIP pick for {day}",
+      "body": "{label} has a new selection. Join VIP to view it."
+    },
+    {
+      "title": "👀 Something new in VIP",
+      "body": "{label} just got a new premium tip. Tap to check it out 🔓"
+    },
+    {
+      "title": "🎯 {label} is live",
+      "body": "Today's VIP selection is ready. Unlock it before kick-off ⏰"
+    },
+    {
+      "title": "{greet}! New VIP tip 👑",
+      "body": "A fresh {label} pick is waiting for you in {app}."
+    },
+    {
+      "title": "🔥 VIP just updated",
+      "body": "New {label} prediction posted. Members see it first."
+    }
+  ],
+  "newVipMany": [
+    {
+      "title": "👑 {count} new VIP tips in {label}",
+      "body": "Fresh premium picks just dropped. Unlock VIP to view them 🔒"
+    },
+    {
+      "title": "🔥 {label}: {count} new picks",
+      "body": "Our analysts posted {count} VIP selections for {day}. Tap to unlock."
+    },
+    {
+      "title": "💎 {count} premium picks are live",
+      "body": "{label} is loaded for {day}. VIP members already see them 👀"
+    },
+    {
+      "title": "⚡ VIP is loaded",
+      "body": "{count} new {label} tips just landed. Join VIP before kick-off ⏰"
+    },
+    {
+      "title": "{greet}! {count} VIP tips are in",
+      "body": "{label} has fresh picks waiting in {app} 👑"
+    },
+    {
+      "title": "🎯 {count} {label} picks ready",
+      "body": "Today's premium selections are up. Unlock them in VIP 🔓"
+    },
+    {
+      "title": "🌙 Tonight's VIP picks are in",
+      "body": "{count} new {label} tips for this evening's games 👑",
+      "hours": [
+        16,
+        23
+      ]
+    },
+    {
+      "title": "☀️ VIP picks for today",
+      "body": "{count} {label} selections are ready. Tap to unlock.",
+      "hours": [
+        5,
+        12
+      ]
+    }
+  ],
+  "wonFree": [
+    {
+      "title": "✅ WON! {match}",
+      "body": "{pick} @ {odds} came in 💰 Congratulations to everyone who followed!"
+    },
+    {
+      "title": "🎉 Free tip WON",
+      "body": "{match} ({score}) — {pick} @ {odds} ✅"
+    },
+    {
+      "title": "💰 Another winner!",
+      "body": "{label}: {match} — {pick} @ {odds} WON 🎉"
+    },
+    {
+      "title": "🏆 Boom! {label} delivers",
+      "body": "{match} ended {score}. Our pick {pick} WON ✅"
+    },
+    {
+      "title": "✅ Green ticket",
+      "body": "{match} — {pick} WON. More free tips coming in {app} ⚽"
+    },
+    {
+      "title": "🎉 Congratulations!",
+      "body": "Free pick {pick} @ {odds} on {match} just WON 💰"
+    },
+    {
+      "title": "🔥 That's a win!",
+      "body": "{match} — {pick} ✅ Did you play it?"
+    }
+  ],
+  "wonFreeMany": [
+    {
+      "title": "🎉 {count} free tips WON",
+      "body": "{match} and {more} more came in · total odds {total} 💰"
+    },
+    {
+      "title": "✅ {label}: {count} winners",
+      "body": "Total odds {total} 🔥 Congratulations to everyone who followed!"
+    },
+    {
+      "title": "💰 Clean sweep in {label}",
+      "body": "{count} tips WON today, including {match} ✅"
+    },
+    {
+      "title": "🏆 What a {day}!",
+      "body": "{count} free picks WON · total odds {total} 🎉"
+    },
+    {
+      "title": "🔥 {count} winners and counting",
+      "body": "{label} delivered again: {match} + {more} more ✅"
+    },
+    {
+      "title": "🎉 Green {day}",
+      "body": "{count} {label} tips WON. More coming in {app} ⚽"
+    }
+  ],
+  "wonVip": [
+    {
+      "title": "🎉 {label} WON ✅",
+      "body": "Our VIP tip just came in 💰 Join VIP for the next one 👑"
+    },
+    {
+      "title": "💰 VIP winner!",
+      "body": "{label} delivered again. VIP members are celebrating 🎉"
+    },
+    {
+      "title": "🏆 {label} came in!",
+      "body": "Congratulations to our VIP members 🎉 Join them today."
+    },
+    {
+      "title": "🔥 VIP pick WON",
+      "body": "{label} hit ✅ The next VIP pick is coming soon in {app}."
+    },
+    {
+      "title": "🎉 Congratulations VIP!",
+      "body": "{label} just landed 💰 Want in on the next one? Tap to join."
+    },
+    {
+      "title": "👑 VIP is on fire",
+      "body": "Another {label} win for our members ✅"
+    }
+  ],
+  "wonVipMany": [
+    {
+      "title": "🎉 {count} {label} tips WON ✅",
+      "body": "Total odds {total} 💰 VIP members are celebrating. Join VIP 👑"
+    },
+    {
+      "title": "💰 VIP clean sweep",
+      "body": "{label}: {count} tips WON · total odds {total} 🔥"
+    },
+    {
+      "title": "🏆 {count} VIP winners!",
+      "body": "{label} delivered big today. Don't miss the next ticket 👑"
+    },
+    {
+      "title": "🔥 VIP {day} success",
+      "body": "{count} {label} picks WON ✅ Join VIP for tomorrow's picks."
+    },
+    {
+      "title": "✅ {label} hits again",
+      "body": "{count} winners · total odds {total}. Tap to see the results 📈"
+    },
+    {
+      "title": "🎉 Congratulations VIP members!",
+      "body": "{count} {label} tips came in 💰 Next picks coming soon."
+    }
+  ],
+  "daily": [
+    {
+      "title": "{greet}! Today's tips are ready ⚽",
+      "body": "Fresh free and VIP predictions for {day} are live in {app}."
+    },
+    {
+      "title": "🔥 {day}'s picks are in",
+      "body": "Free and VIP tips are ready. Check them before kick-off ⏰"
+    },
+    {
+      "title": "☕ Morning, {app} fans",
+      "body": "Today's predictions are live. Grab a coffee and plan your {day} ⚽"
+    },
+    {
+      "title": "📋 Your {day} tips",
+      "body": "Our analysts have gone through today's fixtures. Tap to see the picks."
+    },
+    {
+      "title": "⚽ It's matchday",
+      "body": "{day}'s free and VIP picks are waiting for you in {app}."
+    },
+    {
+      "title": "🎯 Today's selections are live",
+      "body": "New free tips plus premium VIP picks for {day}. Tap to view."
+    },
+    {
+      "title": "🗓️ New day, new picks",
+      "body": "Everything for {day} is ready in {app}. Don't miss kick-off ⏰"
+    },
+    {
+      "title": "💪 Start {day} strong",
+      "body": "Today's predictions are in. Check the free tips and see what's in VIP 👑"
+    },
+    {
+      "title": "🍿 Weekend football is here",
+      "body": "Big {day} fixtures, fresh picks. Tap to see today's tips ⚽",
+      "days": [
+        "sat",
+        "sun"
+      ]
+    },
+    {
+      "title": "🔥 Super {day}",
+      "body": "A packed weekend card — our free and VIP picks are ready.",
+      "days": [
+        "sat",
+        "sun"
+      ]
+    },
+    {
+      "title": "🚀 Monday motivation",
+      "body": "Start the week with today's free and VIP predictions in {app}.",
+      "days": [
+        "mon"
+      ]
+    },
+    {
+      "title": "🎉 Friday picks are in",
+      "body": "Weekend warm-up: today's tips are live in {app} ⚽",
+      "days": [
+        "fri"
+      ]
+    },
+    {
+      "title": "⚽ Midweek action",
+      "body": "{day}'s games are analysed. See today's picks in {app}.",
+      "days": [
+        "tue",
+        "wed",
+        "thu"
+      ]
+    }
+  ],
+  "promo": [
+    {
+      "title": "🔥 {vipWon} VIP tips WON today",
+      "body": "VIP members are cashing out right now 💰 You could be next — tap to see today's picks."
+    },
+    {
+      "title": "👀 {vipCount} VIP picks just dropped",
+      "body": "Fresh analysis for today's matches is ready. VIP members see it first ⚡"
+    },
+    {
+      "title": "💰 Don't watch others win again",
+      "body": "Today's VIP picks are loaded and waiting. Tap to unlock before kick-off 👑"
+    },
+    {
+      "title": "⚽ Big games tonight",
+      "body": "Our VIP team has studied every match. Get the picks before kick-off ⏰",
+      "hours": [
+        14,
+        21
+      ]
+    },
+    {
+      "title": "🎯 Correct score tips are live",
+      "body": "High-odds correct scores and HT/FT picks are available in VIP only 🔒"
+    },
+    {
+      "title": "⏳ Kick-off in a few hours",
+      "body": "Last chance to unlock today's VIP picks before the games start.",
+      "hours": [
+        12,
+        20
+      ]
+    },
+    {
+      "title": "💎 One win can pay for VIP",
+      "body": "A single VIP accumulator can cover your whole subscription. Tap to see today's odds 📈"
+    },
+    {
+      "title": "🏆 Bet smarter, not harder",
+      "body": "Stop picking on feelings. VIP gives you researched tips every day 📊"
+    },
+    {
+      "title": "🚀 Big odds waiting in VIP",
+      "body": "{vipCount} premium tips ready today. Tap to unlock 🔓"
+    },
+    {
+      "title": "👑 VIP members got today's picks first",
+      "body": "Free tips are good, VIP is better. Upgrade and see the difference 💪"
+    },
+    {
+      "title": "🌅 Plan today's bets early",
+      "body": "Today's VIP picks are ready. Check them with your morning tea ☕",
+      "hours": [
+        7,
+        11
+      ]
+    },
+    {
+      "title": "🌙 Tonight's VIP picks are ready",
+      "body": "Evening matches are loaded in VIP. Join before the whistle 🔔",
+      "hours": [
+        16,
+        21
+      ]
+    },
+    {
+      "title": "📈 See the VIP results yourself",
+      "body": "Check our VIP history in {app} and judge the results ✅"
+    },
+    {
+      "title": "🔓 Unlock everything in {app}",
+      "body": "All VIP sections, every day — correct scores, draws, HT/FT and big odds."
+    },
+    {
+      "title": "🤝 Draw Specialist is live",
+      "body": "Draws pay big odds. See today's draw picks in VIP 🔒"
+    },
+    {
+      "title": "⚡ HT/FT picks for {day}",
+      "body": "Half-time/full-time selections with serious odds — VIP only 👑"
+    },
+    {
+      "title": "{greet}! VIP is ready",
+      "body": "{vipCount} premium picks for {day} are waiting in {app} 🔓"
+    },
+    {
+      "title": "🧠 We did the homework",
+      "body": "Form, stats and line-ups — our VIP analysts covered today's games for you 📊"
+    },
+    {
+      "title": "🍿 Weekend VIP card",
+      "body": "The weekend's biggest fixtures, analysed. Unlock VIP picks now 👑",
+      "days": [
+        "fri",
+        "sat",
+        "sun"
+      ]
+    },
+    {
+      "title": "💸 Small stake, big odds",
+      "body": "VIP accumulators with odds you won't find in free tips. Tap to see {day}'s picks."
+    },
+    {
+      "title": "🔔 Your VIP picks are waiting",
+      "body": "Don't let today's premium selections go unseen. Unlock VIP in {app}."
+    },
+    {
+      "title": "📊 Members see more",
+      "body": "VIP gets every pick, every section, every day. Free users see a preview only 👀"
+    }
+  ],
+  "discount": [
+    {
+      "title": "🎁 {percent}% OFF VIP — today only",
+      "body": "Join VIP now and save {percent}% on today's premium picks. Tap to claim before it ends ⏳"
+    },
+    {
+      "title": "🔥 VIP flash sale: {percent}% OFF",
+      "body": "All VIP plans are {percent}% off right now. Don't miss tonight's games 👑"
+    },
+    {
+      "title": "💎 {percent}% OFF VIP access",
+      "body": "Unlock correct scores, HT/FT and big-odds picks for less. Offer ends soon ⏳"
+    },
+    {
+      "title": "⏰ 4 PM deal: {percent}% OFF",
+      "body": "Today's VIP picks for {percent}% less. Grab it before tonight's kick-offs ⚽"
+    },
+    {
+      "title": "🛍️ {day} VIP deal",
+      "body": "Save {percent}% on VIP in {app} — today only 🎁"
+    },
+    {
+      "title": "💥 Price drop on VIP",
+      "body": "{percent}% off every VIP plan for the next few hours. Tap to claim 👑"
+    },
+    {
+      "title": "🎯 Join VIP for less",
+      "body": "{percent}% discount on today's premium tips. Ends at midnight ⏳"
+    },
+    {
+      "title": "🍿 Weekend VIP sale",
+      "body": "{percent}% off VIP for the big weekend games 🔥",
+      "days": [
+        "fri",
+        "sat",
+        "sun"
+      ]
+    }
+  ],
+  "cashback": [
+    {
+      "title": "💸 Instant {percent}% cashback",
+      "body": "Subscribe now for instant {percent}% cashback 💰 Join VIP in {app} tonight."
+    },
+    {
+      "title": "🌙 Midnight cashback is live",
+      "body": "Subscribe now for instant {percent}% cashback on VIP 💸 Tap to join."
+    },
+    {
+      "title": "💰 Get {percent}% back instantly",
+      "body": "Subscribe now for instant {percent}% cashback and unlock today's VIP tips 👑"
+    },
+    {
+      "title": "🦉 Night owl deal",
+      "body": "Join VIP now and get {percent}% cashback instantly 💸"
+    },
+    {
+      "title": "🔁 {percent}% back on VIP",
+      "body": "Subscribe tonight and get {percent}% of it back. Tomorrow's picks, sorted 👑"
+    },
+    {
+      "title": "⭐ Midnight special",
+      "body": "{percent}% instant cashback on every VIP plan in {app}. Tap to claim."
+    },
+    {
+      "title": "💸 Late-night VIP offer",
+      "body": "Start {day} with VIP — {percent}% cashback if you join now."
+    }
+  ]
+}

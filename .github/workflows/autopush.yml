@@ -1,17 +1,18 @@
 name: Auto push notifications
 
 on:
+  # Main trigger: cron-job.org calls the GitHub API every 15 minutes (event "tick"), on time.
+  # The bot then decides from the Nairobi clock what is due: new tips/wins every tick,
+  # daily reminder 09:00, discount 16:00, cashback 00:00, promo once an hour.
+  repository_dispatch:
+    types: [tick, hourly, daily, discount, cashback, tips-updated]
+  # Backup only: GitHub's own timer is often hours late or skipped.
   schedule:
-    - cron: "0 * * * *"      # check for new / won tips every hour (GitHub may delay a few minutes)
-    - cron: "0 6 * * *"      # 06:00 UTC = 09:00 Nairobi — daily "tips are ready" reminder
-    - cron: "0 13 * * *"     # 13:00 UTC = 16:00 Nairobi — 30% OFF VIP offer
-    - cron: "0 21 * * *"     # 21:00 UTC = 00:00 Nairobi — 50% cashback offer
-  repository_dispatch:     # cron-job.org triggers these on time (GitHub's own timer is unreliable)
-    types: [hourly, daily, discount, cashback, tips-updated]
+    - cron: "*/15 * * * *"
   workflow_dispatch:
     inputs:
       mode:
-        description: "poll | daily | test | promo | discount | cashback"
+        description: "auto | poll | daily | test | promo | discount | cashback"
         default: test
         required: true
       only_app:
@@ -37,25 +38,16 @@ jobs:
           node-version: 22
 
       - name: Send notifications
-        if: github.event.inputs.mode != 'promo'
         env:
           FCM_SERVICE_ACCOUNTS: ${{ secrets.FCM_SERVICE_ACCOUNTS }}
-          MODE: ${{ github.event.inputs.mode || (github.event_name == 'repository_dispatch' && contains(fromJSON('["daily","discount","cashback"]'), github.event.action) && github.event.action) || (github.event.schedule == '0 6 * * *' && 'daily') || (github.event.schedule == '0 13 * * *' && 'discount') || (github.event.schedule == '0 21 * * *' && 'cashback') || 'poll' }}
+          MODE: ${{ github.event.inputs.mode || (github.event_name == 'repository_dispatch' && contains(fromJSON('["daily","discount","cashback"]'), github.event.action) && github.event.action) || (github.event.action == 'tips-updated' && 'poll') || 'auto' }}
           FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
-          ONLY_APP: ${{ github.event.inputs.only_app }}
-        run: node autopush.mjs
-
-      - name: Hourly VIP promo
-        if: always() && (github.event.inputs.mode == 'promo' || (github.event_name == 'schedule' && github.event.schedule == '0 * * * *') || (github.event_name == 'repository_dispatch' && github.event.action == 'hourly'))
-        env:
-          FCM_SERVICE_ACCOUNTS: ${{ secrets.FCM_SERVICE_ACCOUNTS }}
-          MODE: promo
-          ONLY_APP: ${{ github.event.inputs.only_app }}
           FORCE_PROMO: ${{ github.event.inputs.mode == 'promo' && '1' || '' }}
+          ONLY_APP: ${{ github.event.inputs.only_app }}
         run: node autopush.mjs
 
       - name: Update team & league logos
-        if: always() && (github.event.inputs.mode == 'poll' || (github.event_name == 'schedule' && github.event.schedule == '0 * * * *') || (github.event_name == 'repository_dispatch' && github.event.action == 'hourly'))
+        if: always() && (github.event_name != 'workflow_dispatch' || github.event.inputs.mode == 'poll' || github.event.inputs.mode == 'auto')
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: node logos.mjs

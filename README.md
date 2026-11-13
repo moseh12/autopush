@@ -82,3 +82,32 @@ Then release an update. A phone only gets pushes after it opens the updated app 
 - `state.json` is the bot's memory of the tips it has already seen. The workflow saves it after each run; don't edit it.
 - Send a one-off push to one app: Run workflow with mode `test` and `only_app` set to that app's id.
 - Logs: Actions tab → open a run → "Send notifications".
+
+## Notification wording (messages.json)
+Every notification text lives in `messages.json`, grouped by type:
+`newFree`, `newFreeMany`, `newVip`, `newVipMany`, `wonFree`, `wonFreeMany`, `wonVip`, `wonVipMany`, `daily`, `promo`, `discount`, `cashback`.
+
+- The bot picks a wording **at random** and **won't reuse one it sent recently** to that app (it remembers them in `state.json` under `_recent`).
+- Placeholders are filled in for you: `{app} {day} {greet} {part} {label} {count} {more} {match} {home} {away} {league} {time} {pick} {odds} {total} {score} {vipCount} {vipWon} {percent}`.
+- A wording whose placeholder has no value is skipped automatically (e.g. `{vipWon}` when nothing has won yet).
+- Optional per line: `"hours": [5, 12]` (only mornings, Nairobi time), `"days": ["sat","sun"]` (weekends only), `"image": "https://…"`.
+- VIP messages are only given the section name, count and total odds, never teams or picks, so VIP stays private.
+- One app can have its own wordings: in `apps.json`, add `"messages": { "promo": [ ... ] }` to that app.
+
+To add variety, just add more lines. The more lines a type has, the longer before any wording comes back.
+
+## On-time sending (cron-job.org, Nairobi time)
+GitHub's own timer is often hours late, so cron-job.org starts the bot every 15 minutes instead.
+Each run checks for new tips and wins, then sends whatever is due on the **Nairobi clock**:
+daily reminder 09:00 · discount 16:00 · cashback 00:00 · promo once an hour (not 22:00–08:00).
+Change the times in `apps.json` → `defaults.schedule`.
+
+1. **GitHub token:** github.com → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate.
+   Repository access: **Only select repositories → autopush**. Permissions → Repository → **Contents: Read and write**. Copy the token.
+2. **cron-job.org:** sign up for free → **Create cronjob**:
+   - URL: `https://api.github.com/repos/moseh12/autopush/dispatches`
+   - Schedule: **every 15 minutes**, time zone **Africa/Nairobi**
+   - Advanced → Request method **POST**
+   - Headers: `Authorization: Bearer YOUR_TOKEN` · `Accept: application/vnd.github+json` · `Content-Type: application/json`
+   - Request body: `{"event_type":"tick"}`
+3. Save, then click **Test run**. You should see a new run in the Actions tab within seconds.

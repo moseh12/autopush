@@ -8,7 +8,12 @@
 //
 // Env:
 //   FCM_SERVICE_ACCOUNTS  JSON object { "<app id>": <service-account json>, ... }  (GitHub secret)
-//   MODE                  "poll" (default) | "daily" | "test" | "promo" (hourly Join-VIP push) | "discount" (4 PM) | "cashback" (midnight)
+//   MODE                  "auto" (every tick: poll + whatever is due on the Nairobi clock) | "poll" | "daily" | "test"
+//                         | "promo" (hourly Join-VIP push) | "discount" (4 PM) | "cashback" (midnight)
+//
+// Timing (Nairobi time, apps.json "defaults.schedule"): daily 09:00, discount 16:00, cashback 00:00,
+// promo hourly outside quiet hours. In "auto" mode each one is sent at most once, and only within
+// "windowHours" after its time — a late trigger never sends a 9 AM reminder in the evening.
 //   DRY_RUN=1             print messages instead of sending
 //   STATE_FILE            default ./state.json
 //   CONFIG_FILE           default ./apps.json
@@ -25,6 +30,10 @@
 //     "vipNewBody":  "..."         text for new VIP tips
 //     "vipWonBody":  "..."         text for a VIP win (when not revealed)
 //     "image": "https://..."      color logo shown in every push of that app (Android small icon is always one color)
+//
+// Wording variety: every notification text comes from messages.json. The bot picks one at
+// random and never reuses a wording it sent recently to that app (remembered in state.json
+// under "_recent"). Per-app overrides: "messages": { "newVip": [...], ... } in apps.json.
 
 import { createHash, createSign } from 'node:crypto';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -63,12 +72,91 @@ function firstTime(key, id) {
 }
 const tokenCache = new Map(); // must be declared before main runs (top-level await)
 
+// ---------------------------------------------------------------- wording variety
+const MESSAGES_FILE = process.env.MESSAGES_FILE || new URL('./messages.json', import.meta.url).pathname;
+const MESSAGES = existsSync(MESSAGES_FILE) ? JSON.parse(readFileSync(MESSAGES_FILE, 'utf8')) : {};
+const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const DAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+/** Nairobi-local weekday/hour and greeting words. */
+function timeVars(offset = 3) {
+  const d = new Date(Date.now() + offset * 3600000);
+  const hour = d.getUTCHours();
+  const dow = d.getUTCDay();
+  const greet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const part = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : hour < 21 ? 'evening' : 'tonight';
+  return { day: DAY_NAMES[dow], dayKey: DAY_KEYS[dow], hour, greet, part };
+}
+
+/** Match details from one tip, for {match} {home} {away} {league} {time} {pick} {odds} {score}. */
+function tipVars(t = {}) {
+  const s = (v) => String(v ?? '').trim();
+  const home = s(t.team_one), away = s(t.team_two);
+  return {
+    home, away,
+    match: home && away ? `${home} vs ${away}` : home || away,
+    league: s(t.league_name), time: s(t.time), pick: s(t.tips_name),
+    odds: s(t.odds_value), score: s(t.results),
+  };
+}
+
+const fillText = (text, vars) => String(text ?? '').replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
+const shortHash = (x) => createHash('sha1').update(x).digest('hex').slice(0, 8);
+
+/** choose(), or the first fallback wording filled in as-is if nothing else fits. */
+function chooseOr(app, kind, vars, fallback) {
+  const all = { app: app.name, ...timeVars(defaults.utcOffset ?? 3), ...vars };
+  return choose(app, kind, vars, fallback)
+    ?? { title: fillText(fallback[0].title, all), body: fillText(fallback[0].body, all) };
+}
+
+/**
+ * Picks a wording for [kind] that this app hasn't seen recently.
+ * Pool order: app.messages[kind] > legacy app[kind].messages > legacy defaults[kind].messages
+ *             > messages.json[kind] > [fallback].
+ * Skips wordings whose placeholders have no value, or whose "days"/"hours" don't match now.
+ */
+function choose(app, kind, vars, fallback = []) {
+  const t = timeVars(defaults.utcOffset ?? 3);
+  const all = { app: app.name, day: t.day, greet: t.greet, part: t.part, ...vars };
+  const pool = app.messages?.[kind] || app[kind]?.messages || defaults.messages?.[kind]
+    || defaults[kind]?.messages || MESSAGES[kind] || fallback;
+
+  const usable = pool.filter((m) => {
+    if (!m || !m.title || !m.body) return false;
+    if (m.days && !m.days.map((d) => String(d).toLowerCase().slice(0, 3)).includes(t.dayKey)) return false;
+    if (m.hours) {
+      const [from, to] = m.hours;
+      const inside = from <= to ? t.hour >= from && t.hour < to : t.hour >= from || t.hour < to;
+      if (!inside) return false;
+    }
+    const needed = [...(m.title + ' ' + m.body).matchAll(/\{(\w+)\}/g)].map((x) => x[1]);
+    return needed.every((k) => {
+      const v = all[k];
+      return v !== undefined && v !== null && String(v).trim() !== '' && String(v) !== '0';
+    });
+  });
+  if (!usable.length) return null;
+
+  state._recent ??= {};
+  const key = `${app.id}:${kind}`;
+  const recent = state._recent[key] ?? [];
+  const fresh = usable.filter((m) => !recent.includes(shortHash(m.title + m.body)));
+  const candidates = fresh.length ? fresh : usable;
+  const msg = candidates[Math.floor(Math.random() * candidates.length)];
+
+  // Remember roughly the last 70% of the pool, so wordings come back only after the rest were used.
+  const keep = Math.max(1, Math.min(Math.floor(usable.length * 0.7), 20));
+  state._recent[key] = [shortHash(msg.title + msg.body), ...recent.filter((h) => h !== shortHash(msg.title + msg.body))].slice(0, keep);
+
+  return { title: fillText(msg.title, all), body: fillText(msg.body, all), image: msg.image };
+}
+
 // ---------------------------------------------------------------- main
-if (MODE === 'daily') {
-  if (firstTime('daily', localNow().date)) for (const app of apps) {
-    const d = { ...defaults.daily, ...app.daily };
-    await push(app, d.title, d.body, { type: 'daily', screen: d.screen, tag: 'daily_reminder' });
-  }
+if (MODE === 'auto') {
+  await auto();
+} else if (MODE === 'daily') {
+  await daily();
 } else if (MODE === 'promo') {
   await promo();
 } else if (MODE === 'discount' || MODE === 'cashback') {
@@ -87,6 +175,30 @@ if (MODE !== 'test') writeFileSync(STATE_FILE, JSON.stringify(state, null, 1) + 
 if (failures) {
   console.error(`${failures} push(es) failed`);
   process.exitCode = 1;
+}
+
+// ---------------------------------------------------------------- auto (one tick)
+async function auto() {
+  const sch = { daily: 9, discount: 16, cashback: 0, windowHours: 2, ...(defaults.schedule || {}) };
+  const offset = defaults.utcOffset ?? 3;
+  const { hour } = localNow(offset);
+  const due = (at) => at !== false && at != null && ((hour - at + 24) % 24) < sch.windowHours;
+
+  await poll();
+  if (due(sch.daily)) await daily();
+  if (due(sch.discount)) await offer('discount');
+  if (due(sch.cashback)) await offer('cashback');
+  await promo();
+}
+
+async function daily() {
+  if (!firstTime('daily', localNow(defaults.utcOffset ?? 3).date)) return;
+  for (const app of apps) {
+    const d = { ...defaults.daily, ...app.daily };
+    const m = choose(app, 'daily', {}, d.title && d.body ? [{ title: d.title, body: d.body }] : [])
+      ?? { title: "🔥 Today's tips are ready", body: 'Fresh free and VIP predictions are live.' };
+    await push(app, m.title, m.body, { type: 'daily', screen: d.screen || 'free', tag: 'daily_reminder' }, m.image);
+  }
 }
 
 // ---------------------------------------------------------------- polling
@@ -125,24 +237,23 @@ async function poll() {
         const fresh = tips.filter((t) => !(tipKey(t) in previous));
         if (fresh.length) {
           const vip = isVip(ep);
-          let title, body;
-          if (vip) {
-            // VIP: never reveal teams, prediction or odds — only that tips exist.
-            title = fresh.length === 1
-              ? `👑 New VIP tip in ${ep.label}`
-              : `👑 ${fresh.length} new VIP tips in ${ep.label}`;
-            body = app.vipNewBody ?? defaults.vipNewBody ?? 'Unlock VIP in the app to view today\'s predictions 🔒';
-          } else {
-            title = fresh.length === 1
-              ? `⚽ New tip in ${ep.label}`
-              : `⚽ ${fresh.length} new tips in ${ep.label}`;
-            body = describe(fresh[0]) + (fresh.length > 1 ? ` + ${fresh.length - 1} more` : '') + ' · Free';
-          }
+          const many = fresh.length > 1;
+          // VIP: never reveal teams, prediction or odds — only the section and how many.
+          const vars = vip
+            ? { label: ep.label, count: fresh.length, more: fresh.length - 1 }
+            : { label: ep.label, count: fresh.length, more: fresh.length - 1, ...tipVars(fresh[0]) };
+          const kind = (vip ? 'newVip' : 'newFree') + (many ? 'Many' : '');
+          const legacy = vip
+            ? [{ title: many ? `👑 {count} new VIP tips in {label}` : `👑 New VIP tip in {label}`,
+                 body: app.vipNewBody ?? defaults.vipNewBody ?? "Unlock VIP in the app to view today's predictions 🔒" }]
+            : [{ title: many ? '⚽ {count} new tips in {label}' : '⚽ New tip in {label}',
+                 body: describe(fresh[0]) + (many ? ` + ${fresh.length - 1} more` : '') + ' · Free' }];
+          const { title, body, image } = chooseOr(app, kind, vars, legacy);
           await push(app, title, body, {
             type: vip ? 'vip_tips' : 'new_tips', vip: vip ? 'true' : 'false',
             screen: ep.screen || 'free', category: ep.label,
             count: fresh.length, tag: `new_${ep.path}`,
-          }, ep.image);
+          }, ep.image || image);
         }
       }
 
@@ -166,25 +277,27 @@ async function pushWins(app, ep, wins) {
   const odds = wins.map((t) => parseFloat(String(t.odds_value ?? '').replace(',', '.')));
   const total = odds.every((o) => o > 0) ? odds.reduce((a, b) => a * b, 1).toFixed(2) : null;
 
-  let title, body;
-  if (wins.length === 1) {
-    title = `🎉 Congratulations! ${ep.label} WON ✅`;
-    body = hide
-      ? (app.vipWonBody ?? defaults.vipWonBody ?? 'Our VIP tip just WON 💰 Join VIP for the next one 👑')
-      : `${describe(wins[0])} 💰 Cash out and enjoy!`;
-  } else {
-    title = `🎉 Congratulations! ${ep.label} — ${wins.length} tips WON ✅`;
-    const odd = total ? ` · total odds ${total}` : '';
-    body = hide
-      ? `${wins.length} VIP tips WON${odd} 💰 Join VIP 👑`
-      : `${describe(wins[0])} and ${wins.length - 1} more${odd} 💰`;
-  }
+  const many = wins.length > 1;
+  const kind = (hide ? 'wonVip' : 'wonFree') + (many ? 'Many' : '');
+  // Hidden VIP wins only get the section, count, odds and total — never teams or the pick.
+  const vars = hide
+    ? { label: ep.label, count: wins.length, more: wins.length - 1, total }
+    : { label: ep.label, count: wins.length, more: wins.length - 1, total, ...tipVars(wins[0]) };
+  const odd = total ? ` · total odds ${total}` : '';
+  const legacy = [{
+    title: many ? `🎉 Congratulations! {label} — {count} tips WON ✅` : '🎉 Congratulations! {label} WON ✅',
+    body: hide
+      ? (many ? `${wins.length} VIP tips WON${odd} 💰 Join VIP 👑`
+              : (app.vipWonBody ?? defaults.vipWonBody ?? 'Our VIP tip just WON 💰 Join VIP for the next one 👑'))
+      : (many ? `${describe(wins[0])} and ${wins.length - 1} more${odd} 💰` : `${describe(wins[0])} 💰 Cash out and enjoy!`),
+  }];
+  const { title, body, image } = chooseOr(app, kind, vars, legacy);
 
   await push(app, title, body, {
     type: 'result', vip: vip ? 'true' : 'false', screen: 'proof',
     category: ep.label, count: wins.length, total_odds: total ?? undefined,
     tag: `won_${ep.path}`, // per section, so one section's push doesn't replace another's
-  });
+  }, image);
 }
 
 // ---------------------------------------------------------------- daily VIP offers
@@ -212,16 +325,14 @@ function offers() { return {
 async function offer(kind) {
   const base = offers()[kind];
   const cfg = { ...(defaults[kind] || {}) };
-  if (!firstTime(kind, localNow().date)) return;
-  const day = Math.floor(Date.now() / 86400000); // changes every day
-  for (const [i, app] of apps.entries()) {
+  if (!firstTime(kind, localNow(defaults.utcOffset ?? 3).date)) return;
+  for (const app of apps) {
     const c = { ...cfg, ...(app[kind] || {}) };
     if (c.enabled === false) continue;
-    const list = c.messages || base.messages;
-    const msg = list[(day + i) % list.length];
-    const vars = { app: app.name, percent: c.percent ?? base.percent };
-    const fill = (t) => t.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
-    await push(app, fill(msg.title), fill(msg.body), {
+    const vars = { percent: c.percent ?? base.percent };
+    const msg = choose(app, kind, vars, base.messages);
+    if (!msg) continue;
+    await push(app, msg.title, msg.body, {
       type: kind, vip: 'true', screen: c.screen || 'vip',
       percent: vars.percent, tag: `vip_${kind}`,
     }, msg.image || c.image);
@@ -254,8 +365,7 @@ async function promo() {
   if (hour === (cfg.skipHour ?? 16) && process.env.FORCE_PROMO !== '1') return console.log('promo skipped: discount offer goes out this hour');
   if (!firstTime('promo', `${localNow(offset).date} ${hour}h`)) return;
 
-  const slot = Math.floor(Date.now() / 3600000); // changes every hour
-  for (const [i, app] of apps.entries()) {
+  for (const app of apps) {
     const appCfg = { ...cfg, ...(app.promo || {}) };
     if (appCfg.enabled === false) continue;
 
@@ -269,15 +379,9 @@ async function promo() {
       vipWon += tips.filter((st) => wonStatuses.includes(st)).length;
     }
 
-    const vars = { app: app.name, vipCount, vipWon };
-    const list = (appCfg.messages || defaultPromo()).filter((m) =>
-      !(/\{vipCount\}/.test(m.title + m.body) && !vipCount) &&
-      !(/\{vipWon\}/.test(m.title + m.body) && !vipWon));
-    if (!list.length) continue;
-
-    const msg = list[(slot + i) % list.length];
-    const fill = (t) => t.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
-    await push(app, fill(msg.title), fill(msg.body), {
+    const msg = choose(app, 'promo', { vipCount, vipWon }, defaultPromo());
+    if (!msg) continue;
+    await push(app, msg.title, msg.body, {
       type: 'promo', vip: 'true', screen: 'vip',
       tag: 'vip_promo', // replaces the previous promo, so the tray isn't flooded
     }, msg.image || appCfg.image);

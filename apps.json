@@ -2,36 +2,27 @@
   "defaults": {
     "baseUrl": "https://mchumwasure.top/api",
     "topic": "all",
+    "utcOffset": 3,
+    "schedule": {
+      "_help": "Nairobi time (24h). Each is sent once per day, within windowHours after its time. Set to false to turn one off.",
+      "daily": 9,
+      "discount": 16,
+      "cashback": 0,
+      "windowHours": 2
+    },
     "wonStatuses": [
       "won",
       "win",
       "winner"
     ],
     "revealVipResults": false,
-    "vipNewBody": "Unlock VIP in the app to view today's predictions 🔒",
-    "vipWonBody": "Our VIP tip just WON 💰 Join VIP for the next one 👑",
     "daily": {
-      "title": "🔥 Today's tips are ready",
-      "body": "Fresh free and VIP predictions are live. Tap to see them before kick-off.",
       "screen": "free"
     },
     "promo": {
-      "quietHours": [22, 8],
-      "messages": [
-        { "title": "🔥 {vipWon} VIP tips WON today", "body": "VIP members are cashing out right now 💰 You could be next — tap to see today's picks." },
-        { "title": "👀 {vipCount} VIP picks just dropped", "body": "Fresh analysis for today's matches is ready. VIP members see it first ⚡" },
-        { "title": "💰 Don't watch others win again", "body": "Today's VIP picks are loaded and waiting. Tap to unlock before kick-off 👑" },
-        { "title": "⚽ Big games tonight", "body": "Our VIP team has studied every match. Get the picks before kick-off ⏰" },
-        { "title": "🎯 Correct score tips are live", "body": "High-odds correct scores and HT/FT picks are available in VIP only 🔒" },
-        { "title": "⏳ Kick-off in a few hours", "body": "Last chance to unlock today's VIP picks before the games start." },
-        { "title": "💎 One win can pay for VIP", "body": "A single VIP accumulator can cover your whole subscription. Tap to see today's odds 📈" },
-        { "title": "🏆 Bet smarter, not harder", "body": "Stop picking on feelings. VIP gives you researched tips every day 📊" },
-        { "title": "🚀 Big odds waiting in VIP", "body": "{vipCount} premium tips ready today. Tap to unlock 🔓" },
-        { "title": "👑 VIP members got today's picks first", "body": "Free tips are good, VIP is better. Upgrade and see the difference 💪" },
-        { "title": "🌅 Plan today's bets early", "body": "Today's VIP picks are ready. Check them with your morning tea ☕" },
-        { "title": "🌙 Tonight's VIP picks are ready", "body": "Evening matches are loaded in VIP. Join before the whistle 🔔" },
-        { "title": "📈 See the VIP results yourself", "body": "Check our VIP history in {app} and judge the results ✅" },
-        { "title": "🔓 Unlock everything in {app}", "body": "All VIP sections, every day — correct scores, draws, HT/FT and big odds." }
+      "quietHours": [
+        22,
+        8
       ]
     },
     "discount": {
