@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-14T01:16:05.780Z",
+ "updated": "2026-11-14T01:31:04.621Z",
  "quota": {
   "day": "2026-11-14",
-  "used": 48
+  "used": 56
  },
  "teams": {
   "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
@@ -16,6 +16,7 @@
   "albacete": "https://media.api-sports.io/football/teams/722.png",
   "alcoyano": "https://media.api-sports.io/football/teams/9686.png",
   "altamura": "https://media.api-sports.io/football/teams/9549.png",
+  "amstetten": "https://media.api-sports.io/football/teams/1404.png",
   "andorra": "https://media.api-sports.io/football/teams/1110.png",
   "apia leichhardt": "https://media.api-sports.io/football/teams/3764.png",
   "arba": "https://media.api-sports.io/football/teams/4126.png",
@@ -48,6 +49,7 @@
   "castellonense": "https://media.api-sports.io/football/teams/22138.png",
   "cavese": "https://media.api-sports.io/football/teams/1712.png",
   "cerro largo": "https://media.api-sports.io/football/teams/2369.png",
+  "chanmari": "https://media.api-sports.io/football/teams/25923.png",
   "chatham": "https://media.api-sports.io/football/teams/8737.png",
   "cibalia": "https://media.api-sports.io/football/teams/1021.png",
   "cieza": "https://media.api-sports.io/football/teams/20277.png",
@@ -98,6 +100,7 @@
   "iberia 1999": "https://media.api-sports.io/football/teams/3502.png",
   "iceland": "https://media.api-sports.io/football/teams/18.png",
   "india": "https://media.api-sports.io/football/teams/1537.png",
+  "innsbruck": "https://media.api-sports.io/football/teams/17203.png",
   "ismaily": "https://media.api-sports.io/football/teams/1030.png",
   "jablonec": "https://media.api-sports.io/football/teams/1122.png",
   "jaguar": "https://media.api-sports.io/football/teams/1133.png",
@@ -106,6 +109,7 @@
   "kleczew": "https://media.api-sports.io/football/teams/16255.png",
   "la luz": "https://media.api-sports.io/football/teams/18295.png",
   "la nucia": "https://media.api-sports.io/football/teams/9393.png",
+  "lajong": "https://media.api-sports.io/football/teams/3470.png",
   "larne": "https://media.api-sports.io/football/teams/5354.png",
   "latvia": "https://media.api-sports.io/football/teams/1092.png",
   "leatherhead": "https://media.api-sports.io/football/teams/4696.png",
@@ -157,6 +161,7 @@
   "polkowice": "https://media.api-sports.io/football/teams/9132.png",
   "portmore": "https://media.api-sports.io/football/teams/3443.png",
   "pruszkow": "https://media.api-sports.io/football/teams/6964.png",
+  "qarabag": "https://media.api-sports.io/football/teams/556.png",
   "rb leipzig": "https://media.api-sports.io/football/teams/173.png",
   "rc kouba": "https://media.api-sports.io/football/teams/935.png",
   "rilski sportist": "https://media.api-sports.io/football/teams/8547.png",
@@ -177,6 +182,7 @@
   "sierra leone": "https://media.api-sports.io/football/teams/1499.png",
   "sochaux": "https://media.api-sports.io/football/teams/115.png",
   "sri lanka": "https://media.api-sports.io/football/teams/5166.png",
+  "strasbourg": "https://media.api-sports.io/football/teams/95.png",
   "sweden": "https://media.api-sports.io/football/teams/5.png",
   "tacuarembo": "https://media.api-sports.io/football/teams/2374.png",
   "tecnico u": "https://media.api-sports.io/football/teams/1151.png",
@@ -184,7 +190,9 @@
   "tlemcen": "https://media.api-sports.io/football/teams/928.png",
   "torino": "https://media.api-sports.io/football/teams/503.png",
   "torquay": "https://media.api-sports.io/football/teams/1827.png",
+  "toulouse": "https://media.api-sports.io/football/teams/96.png",
   "treowen": "https://media.api-sports.io/football/teams/11309.png",
+  "turan": "https://media.api-sports.io/football/teams/5499.png",
   "union sa": "https://media.api-sports.io/football/teams/441.png",
   "united arab emirates": "https://media.api-sports.io/football/teams/1563.png",
   "usm alger": "https://media.api-sports.io/football/teams/910.png",
