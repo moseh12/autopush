@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-14T02:16:00.849Z",
+ "updated": "2026-11-14T02:31:19.415Z",
  "quota": {
   "day": "2026-11-14",
-  "used": 80
+  "used": 88
  },
  "teams": {
   "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
@@ -48,6 +48,7 @@
   "bromley u21": "https://media.api-sports.io/football/teams/24846.png",
   "bulgaria": "https://media.api-sports.io/football/teams/1103.png",
   "burkina faso": "https://media.api-sports.io/football/teams/1502.png",
+  "burundi": "https://media.api-sports.io/football/teams/1528.png",
   "bury town": "https://media.api-sports.io/football/teams/7622.png",
   "bw linz": "https://media.api-sports.io/football/teams/1394.png",
   "ca river plate": "https://media.api-sports.io/football/teams/2351.png",
@@ -98,8 +99,10 @@
   "gibraltar": "https://media.api-sports.io/football/teams/1093.png",
   "gillingham": "https://media.api-sports.io/football/teams/1347.png",
   "gloucester": "https://media.api-sports.io/football/teams/8653.png",
+  "greece": "https://media.api-sports.io/football/teams/1117.png",
   "hanwell town": "https://media.api-sports.io/football/teams/7645.png",
   "hapoel acre": "https://media.api-sports.io/football/teams/4482.png",
+  "haras el hodood": "https://media.api-sports.io/football/teams/1576.png",
   "hemel hempstead": "https://media.api-sports.io/football/teams/8660.png",
   "honduras": "https://media.api-sports.io/football/teams/4672.png",
   "hong kong fc": "https://media.api-sports.io/football/teams/4462.png",
@@ -117,6 +120,7 @@
   "jeddah": "https://media.api-sports.io/football/teams/2947.png",
   "juventus": "https://media.api-sports.io/football/teams/496.png",
   "kazakhstan": "https://media.api-sports.io/football/teams/1095.png",
+  "khenchela": "https://media.api-sports.io/football/teams/10752.png",
   "kimberley": "https://media.api-sports.io/football/teams/3975.png",
   "kleczew": "https://media.api-sports.io/football/teams/16255.png",
   "la luz": "https://media.api-sports.io/football/teams/18295.png",
@@ -153,6 +157,7 @@
   "naft bandar abbas": "https://media.api-sports.io/football/teams/24800.png",
   "nancy": "https://media.api-sports.io/football/teams/102.png",
   "napredak": "https://media.api-sports.io/football/teams/2655.png",
+  "netherlands": "https://media.api-sports.io/football/teams/1118.png",
   "new zealand": "https://media.api-sports.io/football/teams/4673.png",
   "nezla": "https://media.api-sports.io/football/teams/20696.png",
   "northampton": "https://media.api-sports.io/football/teams/1337.png",
@@ -175,6 +180,7 @@
   "portmore": "https://media.api-sports.io/football/teams/3443.png",
   "pruszkow": "https://media.api-sports.io/football/teams/6964.png",
   "qarabag": "https://media.api-sports.io/football/teams/556.png",
+  "racing montevideo": "https://media.api-sports.io/football/teams/2359.png",
   "rb leipzig": "https://media.api-sports.io/football/teams/173.png",
   "rc kouba": "https://media.api-sports.io/football/teams/935.png",
   "real sociedad": "https://media.api-sports.io/football/teams/548.png",
@@ -191,6 +197,7 @@
   "saida": "https://media.api-sports.io/football/teams/934.png",
   "samgurali": "https://media.api-sports.io/football/teams/10017.png",
   "sanat naft": "https://media.api-sports.io/football/teams/2743.png",
+  "saoura": "https://media.api-sports.io/football/teams/914.png",
   "setif": "https://media.api-sports.io/football/teams/905.png",
   "sfax railways": "https://media.api-sports.io/football/teams/10633.png",
   "shabab al ordon": "https://media.api-sports.io/football/teams/4539.png",
@@ -226,6 +233,7 @@
   "xamax": "https://media.api-sports.io/football/teams/1015.png",
   "york city": "https://media.api-sports.io/football/teams/1604.png",
   "yverdon": "https://media.api-sports.io/football/teams/6653.png",
+  "zambia": "https://media.api-sports.io/football/teams/1507.png",
   "zarzis": "https://media.api-sports.io/football/teams/989.png",
   "zimbabwe": "https://media.api-sports.io/football/teams/1522.png"
  },
