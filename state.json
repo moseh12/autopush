@@ -14,7 +14,10 @@
    "id:14032": "pending",
    "id:14038": "pending"
   },
-  "draws-tips": {},
+  "draws-tips": {
+   "id:14045": "pending",
+   "id:14046": "pending"
+  },
   "premium-tips": {
    "id:14029": "pending",
    "id:14039": "pending"
@@ -39,10 +42,10 @@
    "c466fa75"
   ],
   "cashscoretips:newVipMany": [
+   "a7a519a0",
    "5e64d318",
    "984ffb1d",
-   "3b99a87f",
-   "f5e795e9"
+   "3b99a87f"
   ],
   "cashscoretips:promo": [
    "735a3c7c",
