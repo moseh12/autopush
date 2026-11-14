@@ -1,7 +1,9 @@
 {
  "cashscoretips": {
   "sure-tips": {},
-  "over-tips": {},
+  "over-tips": {
+   "id:14024": "pending"
+  },
   "daily-tips": {},
   "htft-tips": {},
   "draws-tips": {},
@@ -16,6 +18,7 @@
  },
  "_recent": {
   "cashscoretips:newFree": [
+   "2e169938",
    "33195630",
    "c466fa75"
   ],

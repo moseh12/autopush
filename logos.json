@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-14T02:31:19.415Z",
+ "updated": "2026-11-14T02:41:04.615Z",
  "quota": {
   "day": "2026-11-14",
-  "used": 88
+  "used": 90
  },
  "teams": {
   "aarhus fremad": "https://media.api-sports.io/football/teams/6004.png",
@@ -161,6 +161,7 @@
   "new zealand": "https://media.api-sports.io/football/teams/4673.png",
   "nezla": "https://media.api-sports.io/football/teams/20696.png",
   "northampton": "https://media.api-sports.io/football/teams/1337.png",
+  "norway": "https://media.api-sports.io/football/teams/1090.png",
   "nysa": "https://media.api-sports.io/football/teams/14145.png",
   "oldham": "https://media.api-sports.io/football/teams/1349.png",
   "olimpo": "https://media.api-sports.io/football/teams/443.png",
@@ -229,6 +230,7 @@
   "victoria united": "https://media.api-sports.io/football/teams/18919.png",
   "villarreal": "https://media.api-sports.io/football/teams/533.png",
   "vis pesaro": "https://media.api-sports.io/football/teams/1708.png",
+  "wales": "https://media.api-sports.io/football/teams/767.png",
   "whitby": "https://media.api-sports.io/football/teams/7757.png",
   "xamax": "https://media.api-sports.io/football/teams/1015.png",
   "york city": "https://media.api-sports.io/football/teams/1604.png",
