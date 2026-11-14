@@ -11,11 +11,11 @@
    "id:14044": "pending"
   },
   "htft-tips": {
-   "id:14032": "pending",
-   "id:14038": "pending"
+   "id:14032": "win",
+   "id:14038": "win"
   },
   "draws-tips": {
-   "id:14045": "pending",
+   "id:14045": "loss",
    "id:14046": "pending"
   },
   "premium-tips": {
@@ -70,6 +70,7 @@
    "161bb26a"
   ],
   "cashscoretips:wonVipMany": [
+   "3f84b729",
    "954a5ac7",
    "4ee68a15"
   ],
