@@ -8,7 +8,9 @@
   "htft-tips": {},
   "draws-tips": {},
   "premium-tips": {},
-  "special-tips": {}
+  "special-tips": {
+   "id:14028": "pending"
+  }
  },
  "_sent": {
   "discount": "2026-11-13",
@@ -51,6 +53,9 @@
   ],
   "cashscoretips:wonVip": [
    "f9601f6b"
+  ],
+  "cashscoretips:newVip": [
+   "cb726802"
   ]
  }
 }
