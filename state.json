@@ -9,7 +9,10 @@
    "id:14050": "pending",
    "id:14051": "pending"
   },
-  "htft-tips": {},
+  "htft-tips": {
+   "id:14057": "pending",
+   "id:14058": "pending"
+  },
   "draws-tips": {},
   "premium-tips": {},
   "special-tips": {}
@@ -28,10 +31,10 @@
    "c466fa75"
   ],
   "cashscoretips:newVipMany": [
+   "cb96c84c",
    "c2898f86",
    "a7a519a0",
-   "5e64d318",
-   "984ffb1d"
+   "5e64d318"
   ],
   "cashscoretips:promo": [
    "563a25ce",
