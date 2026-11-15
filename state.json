@@ -1,6 +1,9 @@
 {
  "cashscoretips": {
-  "sure-tips": {},
+  "sure-tips": {
+   "id:14048": "pending",
+   "id:14049": "pending"
+  },
   "over-tips": {},
   "daily-tips": {},
   "htft-tips": {},
@@ -66,6 +69,9 @@
   ],
   "cashscoretips:daily": [
    "fdd4705a"
+  ],
+  "cashscoretips:newFreeMany": [
+   "804a03ef"
   ]
  }
 }
