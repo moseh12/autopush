@@ -14,12 +14,16 @@
    "id:14058": "pending"
   },
   "draws-tips": {
-   "id:14063": "pending"
+   "id:14063": "pending",
+   "id:14070": "pending"
   },
   "premium-tips": {
    "id:14064": "pending"
   },
-  "special-tips": {}
+  "special-tips": {
+   "id:14071": "pending",
+   "id:14072": "pending"
+  }
  },
  "_sent": {
   "discount": "2026-11-14",
@@ -35,10 +39,10 @@
    "c466fa75"
   ],
   "cashscoretips:newVipMany": [
+   "984ffb1d",
    "3b99a87f",
    "cb96c84c",
-   "c2898f86",
-   "a7a519a0"
+   "c2898f86"
   ],
   "cashscoretips:promo": [
    "563a25ce",
@@ -72,11 +76,11 @@
    "f9601f6b"
   ],
   "cashscoretips:newVip": [
+   "cb726802",
    "ec3e3bbf",
    "475b3d42",
    "29c4b4a4",
-   "8e58c892",
-   "309d3a91"
+   "8e58c892"
   ],
   "cashscoretips:daily": [
    "fdd4705a"
