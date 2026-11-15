@@ -1,8 +1,7 @@
 {
  "cashscoretips": {
   "sure-tips": {
-   "id:14048": "pending",
-   "id:14049": "pending"
+   "id:14049": "win"
   },
   "over-tips": {},
   "daily-tips": {
@@ -90,6 +89,9 @@
   ],
   "cashscoretips:newFreeMany": [
    "804a03ef"
+  ],
+  "cashscoretips:wonFree": [
+   "21934148"
   ]
  }
 }
