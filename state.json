@@ -11,8 +11,8 @@
    "id:14096": "win"
   },
   "htft-tips": {
-   "id:14093": "pending",
-   "id:14095": "pending"
+   "id:14093": "win",
+   "id:14095": "win"
   },
   "draws-tips": {
    "id:14073": "pending",
@@ -31,7 +31,7 @@
   "discount": "2026-11-16",
   "cashback": "2026-11-16",
   "daily": "2026-11-16",
-  "promo": "2026-11-16 20h"
+  "promo": "2026-11-16 21h"
  },
  "_recent": {
   "cashscoretips:newFree": [
@@ -49,6 +49,7 @@
    "984ffb1d"
   ],
   "cashscoretips:promo": [
+   "86f4ef25",
    "5df8def5",
    "51cccf23",
    "bc1c9862",
@@ -58,9 +59,7 @@
    "41965951",
    "b89f4928",
    "b872865f",
-   "13e64f63",
-   "f6b5c4ba",
-   "563a25ce"
+   "13e64f63"
   ],
   "cashscoretips:discount": [
    "980e9566",
@@ -74,10 +73,10 @@
    "161bb26a"
   ],
   "cashscoretips:wonVipMany": [
+   "15c2ac60",
    "30c81527",
    "3f84b729",
-   "954a5ac7",
-   "4ee68a15"
+   "954a5ac7"
   ],
   "cashscoretips:wonVip": [
    "24f5ccda",
