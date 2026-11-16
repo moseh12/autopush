@@ -1,14 +1,14 @@
 {
  "cashscoretips": {
   "sure-tips": {
-   "id:14082": "pending"
+   "id:14082": "win"
   },
   "over-tips": {
    "id:14092": "pending"
   },
   "daily-tips": {
-   "id:14094": "pending",
-   "id:14096": "pending"
+   "id:14094": "win",
+   "id:14096": "win"
   },
   "htft-tips": {
    "id:14093": "pending",
@@ -74,6 +74,7 @@
    "161bb26a"
   ],
   "cashscoretips:wonVipMany": [
+   "30c81527",
    "3f84b729",
    "954a5ac7",
    "4ee68a15"
@@ -99,6 +100,7 @@
    "804a03ef"
   ],
   "cashscoretips:wonFree": [
+   "aa9d80bd",
    "21934148"
   ]
  }
