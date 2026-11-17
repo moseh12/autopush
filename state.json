@@ -1,6 +1,8 @@
 {
  "cashscoretips": {
-  "sure-tips": {},
+  "sure-tips": {
+   "id:14100": "pending"
+  },
   "over-tips": {},
   "daily-tips": {},
   "htft-tips": {},
@@ -18,12 +20,12 @@
  },
  "_recent": {
   "cashscoretips:newFree": [
+   "b2bcc41b",
    "e51e63be",
    "820d4f97",
    "d8fea4c8",
    "2e169938",
-   "33195630",
-   "c466fa75"
+   "33195630"
   ],
   "cashscoretips:newVipMany": [
    "a7a519a0",
