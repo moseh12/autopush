@@ -1,13 +1,13 @@
 {
  "cashscoretips": {
   "sure-tips": {
-   "id:14134": "pending"
+   "id:14134": "loss"
   },
   "over-tips": {
    "id:14140": "pending"
   },
   "daily-tips": {
-   "id:14139": "pending",
+   "id:14139": "win",
    "id:14146": "win"
   },
   "htft-tips": {
@@ -16,7 +16,7 @@
   },
   "draws-tips": {
    "id:14127": "win",
-   "id:14128": "pending"
+   "id:14128": "loss"
   },
   "premium-tips": {
    "id:14123": "pending",
@@ -81,10 +81,10 @@
    "4ee68a15"
   ],
   "cashscoretips:wonVip": [
+   "9e4e94ec",
    "f9601f6b",
    "24f5ccda",
-   "9486e64d",
-   "441f06a3"
+   "9486e64d"
   ],
   "cashscoretips:newVip": [
    "309d3a91",
