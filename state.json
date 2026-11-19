@@ -6,8 +6,12 @@
   "over-tips": {
    "id:14164": "pending"
   },
-  "daily-tips": {},
-  "htft-tips": {},
+  "daily-tips": {
+   "id:14168": "pending"
+  },
+  "htft-tips": {
+   "id:14167": "pending"
+  },
   "draws-tips": {
    "id:14154": "pending",
    "id:14155": "pending"
@@ -18,7 +22,8 @@
   },
   "special-tips": {
    "id:14161": "pending",
-   "id:14162": "pending"
+   "id:14162": "pending",
+   "id:14169": "pending"
   }
  },
  "_sent": {
@@ -80,11 +85,11 @@
    "9486e64d"
   ],
   "cashscoretips:newVip": [
-   "8e58c892",
-   "f7cae257",
-   "309d3a91",
    "cb726802",
-   "8621375e"
+   "29c4b4a4",
+   "475b3d42",
+   "8e58c892",
+   "f7cae257"
   ],
   "cashscoretips:daily": [
    "5cada159",
