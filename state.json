@@ -4,7 +4,9 @@
   "over-tips": {},
   "daily-tips": {},
   "htft-tips": {},
-  "draws-tips": {},
+  "draws-tips": {
+   "id:14154": "pending"
+  },
   "premium-tips": {},
   "special-tips": {}
  },
@@ -67,11 +69,11 @@
    "9486e64d"
   ],
   "cashscoretips:newVip": [
+   "f7cae257",
    "309d3a91",
    "cb726802",
    "8621375e",
-   "475b3d42",
-   "29c4b4a4"
+   "475b3d42"
   ],
   "cashscoretips:daily": [
    "5cada159",
