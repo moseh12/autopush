@@ -1,7 +1,7 @@
 {
  "cashscoretips": {
   "sure-tips": {
-   "id:14158": "pending"
+   "id:14158": "win"
   },
   "over-tips": {
    "id:14164": "pending"
@@ -104,6 +104,7 @@
    "804a03ef"
   ],
   "cashscoretips:wonFree": [
+   "7a4707d1",
    "aa9d80bd",
    "21934148"
   ],
