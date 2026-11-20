@@ -3,7 +3,9 @@
   "sure-tips": {
    "id:14186": "pending"
   },
-  "over-tips": {},
+  "over-tips": {
+   "id:14197": "pending"
+  },
   "daily-tips": {
    "id:14195": "pending",
    "id:14196": "pending"
@@ -30,16 +32,16 @@
   "discount": "2026-11-19",
   "cashback": "2026-11-20",
   "daily": "2026-11-20",
-  "promo": "2026-11-20 9h"
+  "promo": "2026-11-20 10h"
  },
  "_recent": {
   "cashscoretips:newFree": [
+   "820d4f97",
    "e51e63be",
    "2e169938",
    "d8fea4c8",
    "c466fa75",
-   "33195630",
-   "0fbaf30a"
+   "33195630"
   ],
   "cashscoretips:newVipMany": [
    "cb96c84c",
@@ -48,6 +50,7 @@
    "f5e795e9"
   ],
   "cashscoretips:promo": [
+   "13e64f63",
    "735a3c7c",
    "dd445897",
    "86f4ef25",
