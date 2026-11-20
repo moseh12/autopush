@@ -16,7 +16,7 @@
   },
   "draws-tips": {
    "id:14190": "pending",
-   "id:14191": "pending"
+   "id:14191": "win"
   },
   "premium-tips": {
    "id:14185": "pending",
@@ -85,10 +85,10 @@
    "954a5ac7"
   ],
   "cashscoretips:wonVip": [
+   "441f06a3",
    "9e4e94ec",
    "f9601f6b",
-   "24f5ccda",
-   "9486e64d"
+   "24f5ccda"
   ],
   "cashscoretips:newVip": [
    "f7cae257",
