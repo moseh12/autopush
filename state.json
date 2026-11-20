@@ -20,12 +20,12 @@
   },
   "premium-tips": {
    "id:14185": "pending",
-   "id:14192": "pending"
+   "id:14192": "win"
   },
   "special-tips": {
    "id:14183": "pending",
    "id:14188": "pending",
-   "id:14193": "pending"
+   "id:14193": "win"
   }
  },
  "_sent": {
@@ -85,10 +85,10 @@
    "954a5ac7"
   ],
   "cashscoretips:wonVip": [
+   "24f5ccda",
+   "fc04ac13",
    "441f06a3",
-   "9e4e94ec",
-   "f9601f6b",
-   "24f5ccda"
+   "9e4e94ec"
   ],
   "cashscoretips:newVip": [
    "f7cae257",
