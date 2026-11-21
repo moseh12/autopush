@@ -1,32 +1,12 @@
 {
  "cashscoretips": {
-  "sure-tips": {
-   "id:14186": "pending"
-  },
-  "over-tips": {
-   "id:14197": "pending"
-  },
-  "daily-tips": {
-   "id:14195": "pending",
-   "id:14196": "pending"
-  },
-  "htft-tips": {
-   "id:14184": "pending",
-   "id:14189": "pending"
-  },
-  "draws-tips": {
-   "id:14190": "pending",
-   "id:14191": "win"
-  },
-  "premium-tips": {
-   "id:14185": "pending",
-   "id:14192": "win"
-  },
-  "special-tips": {
-   "id:14183": "pending",
-   "id:14188": "pending",
-   "id:14193": "win"
-  }
+  "sure-tips": {},
+  "over-tips": {},
+  "daily-tips": {},
+  "htft-tips": {},
+  "draws-tips": {},
+  "premium-tips": {},
+  "special-tips": {}
  },
  "_sent": {
   "discount": "2026-11-20",
