@@ -6,7 +6,10 @@
   "over-tips": {
    "id:14207": "pending"
   },
-  "daily-tips": {},
+  "daily-tips": {
+   "id:14224": "pending",
+   "id:14225": "pending"
+  },
   "htft-tips": {
    "id:14209": "pending",
    "id:14211": "pending"
@@ -41,10 +44,10 @@
    "d8fea4c8"
   ],
   "cashscoretips:newVipMany": [
+   "5e64d318",
    "c2898f86",
    "a7a519a0",
-   "cb96c84c",
-   "984ffb1d"
+   "cb96c84c"
   ],
   "cashscoretips:promo": [
    "13e64f63",
