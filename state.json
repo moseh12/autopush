@@ -30,7 +30,7 @@
  },
  "_sent": {
   "discount": "2026-11-23",
-  "cashback": "2026-11-23",
+  "cashback": "2026-11-24",
   "daily": "2026-11-23",
   "promo": "2026-11-23 21h"
  },
@@ -69,10 +69,10 @@
    "852cd952"
   ],
   "cashscoretips:cashback": [
+   "1f84c0f1",
    "5f32b3fd",
    "8d741af6",
-   "7318acbf",
-   "93cbd9ec"
+   "7318acbf"
   ],
   "cashscoretips:wonVipMany": [
    "c37eb327",
