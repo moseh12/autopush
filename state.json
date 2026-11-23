@@ -2,9 +2,17 @@
  "cashscoretips": {
   "sure-tips": {},
   "over-tips": {},
-  "daily-tips": {},
-  "htft-tips": {},
-  "draws-tips": {},
+  "daily-tips": {
+   "id:14264": "pending",
+   "id:14265": "pending"
+  },
+  "htft-tips": {
+   "id:14266": "pending"
+  },
+  "draws-tips": {
+   "id:14263": "pending",
+   "id:14267": "pending"
+  },
   "premium-tips": {},
   "special-tips": {}
  },
@@ -24,10 +32,10 @@
    "e51e63be"
   ],
   "cashscoretips:newVipMany": [
+   "c2898f86",
+   "f5e795e9",
    "cb96c84c",
-   "984ffb1d",
-   "5e64d318",
-   "c2898f86"
+   "984ffb1d"
   ],
   "cashscoretips:promo": [
    "51cccf23",
@@ -68,11 +76,11 @@
    "9e4e94ec"
   ],
   "cashscoretips:newVip": [
+   "cb726802",
    "29c4b4a4",
    "8e58c892",
    "8621375e",
-   "309d3a91",
-   "ec3e3bbf"
+   "309d3a91"
   ],
   "cashscoretips:daily": [
    "618a8c2e",
