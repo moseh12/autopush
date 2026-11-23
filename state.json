@@ -1,20 +1,28 @@
 {
  "cashscoretips": {
-  "sure-tips": {},
+  "sure-tips": {
+   "id:14272": "pending"
+  },
   "over-tips": {},
   "daily-tips": {
    "id:14264": "pending",
    "id:14265": "pending"
   },
   "htft-tips": {
-   "id:14266": "pending"
+   "id:14266": "pending",
+   "id:14274": "pending"
   },
   "draws-tips": {
    "id:14263": "pending",
    "id:14267": "pending"
   },
-  "premium-tips": {},
-  "special-tips": {}
+  "premium-tips": {
+   "id:14268": "pending",
+   "id:14271": "pending"
+  },
+  "special-tips": {
+   "id:14273": "pending"
+  }
  },
  "_sent": {
   "discount": "2026-11-22",
@@ -24,18 +32,18 @@
  },
  "_recent": {
   "cashscoretips:newFree": [
+   "d8fea4c8",
    "33195630",
    "8d8445aa",
    "0fbaf30a",
    "b2bcc41b",
-   "820d4f97",
-   "e51e63be"
+   "820d4f97"
   ],
   "cashscoretips:newVipMany": [
+   "a7a519a0",
    "c2898f86",
    "f5e795e9",
-   "cb96c84c",
-   "984ffb1d"
+   "cb96c84c"
   ],
   "cashscoretips:promo": [
    "51cccf23",
@@ -76,11 +84,11 @@
    "9e4e94ec"
   ],
   "cashscoretips:newVip": [
+   "475b3d42",
+   "f7cae257",
    "cb726802",
    "29c4b4a4",
-   "8e58c892",
-   "8621375e",
-   "309d3a91"
+   "8e58c892"
   ],
   "cashscoretips:daily": [
    "618a8c2e",
