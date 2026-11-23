@@ -3,7 +3,9 @@
   "sure-tips": {
    "id:14272": "pending"
   },
-  "over-tips": {},
+  "over-tips": {
+   "id:14277": "pending"
+  },
   "daily-tips": {
    "id:14264": "pending",
    "id:14265": "pending"
@@ -22,7 +24,8 @@
   },
   "special-tips": {
    "id:14273": "pending",
-   "id:14275": "pending"
+   "id:14275": "pending",
+   "id:14276": "pending"
   }
  },
  "_sent": {
@@ -33,12 +36,12 @@
  },
  "_recent": {
   "cashscoretips:newFree": [
+   "e51e63be",
    "d8fea4c8",
    "33195630",
    "8d8445aa",
    "0fbaf30a",
-   "b2bcc41b",
-   "820d4f97"
+   "b2bcc41b"
   ],
   "cashscoretips:newVipMany": [
    "a7a519a0",
@@ -85,11 +88,11 @@
    "9e4e94ec"
   ],
   "cashscoretips:newVip": [
+   "309d3a91",
    "8621375e",
    "475b3d42",
    "f7cae257",
-   "cb726802",
-   "29c4b4a4"
+   "cb726802"
   ],
   "cashscoretips:daily": [
    "618a8c2e",
