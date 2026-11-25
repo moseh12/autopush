@@ -23,7 +23,8 @@
    "id:14314": "pending"
   },
   "special-tips": {
-   "id:14319": "pending"
+   "id:14319": "pending",
+   "id:14323": "pending"
   }
  },
  "_sent": {
@@ -85,11 +86,11 @@
    "9e4e94ec"
   ],
   "cashscoretips:newVip": [
+   "475b3d42",
    "f7cae257",
    "cb726802",
    "ec3e3bbf",
-   "309d3a91",
-   "8621375e"
+   "309d3a91"
   ],
   "cashscoretips:daily": [
    "cc3ee3d3",
