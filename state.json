@@ -21,17 +21,17 @@
   },
   "premium-tips": {
    "id:14347": "win",
-   "id:14349": "pending"
+   "id:14349": "win"
   },
   "special-tips": {
-   "id:14337": "pending",
-   "id:14345": "pending",
-   "id:14361": "pending"
+   "id:14337": "win",
+   "id:14345": "win",
+   "id:14361": "win"
   }
  },
  "_sent": {
   "discount": "2026-11-26",
-  "cashback": "2026-11-26",
+  "cashback": "2026-11-27",
   "daily": "2026-11-26",
   "promo": "2026-11-26 21h"
  },
@@ -70,22 +70,22 @@
    "5ef67412"
   ],
   "cashscoretips:cashback": [
+   "7318acbf",
    "5566948f",
    "93cbd9ec",
-   "1f84c0f1",
-   "5f32b3fd"
+   "1f84c0f1"
   ],
   "cashscoretips:wonVipMany": [
+   "c37eb327",
    "30c81527",
    "954a5ac7",
-   "3f84b729",
-   "4ee68a15"
+   "3f84b729"
   ],
   "cashscoretips:wonVip": [
+   "24f5ccda",
    "f9601f6b",
    "441f06a3",
-   "9e4e94ec",
-   "9486e64d"
+   "9e4e94ec"
   ],
   "cashscoretips:newVip": [
    "8621375e",
