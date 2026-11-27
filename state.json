@@ -1,8 +1,8 @@
 {
  "cashscoretips": {
   "sure-tips": {
-   "id:14373": "pending",
-   "id:14378": "pending"
+   "id:14373": "win",
+   "id:14378": "win"
   },
   "over-tips": {},
   "daily-tips": {
@@ -29,7 +29,7 @@
  },
  "_sent": {
   "discount": "2026-11-27",
-  "cashback": "2026-11-27",
+  "cashback": "2026-11-28",
   "daily": "2026-11-27",
   "promo": "2026-11-27 21h"
  },
@@ -69,10 +69,10 @@
    "5ef67412"
   ],
   "cashscoretips:cashback": [
+   "161bb26a",
    "7318acbf",
    "5566948f",
-   "93cbd9ec",
-   "1f84c0f1"
+   "93cbd9ec"
   ],
   "cashscoretips:wonVipMany": [
    "c37eb327",
@@ -112,6 +112,7 @@
    "aa9d80bd"
   ],
   "cashscoretips:wonFreeMany": [
+   "c888bbe5",
    "6ab2c51a"
   ]
  }
