@@ -6,7 +6,8 @@
   },
   "over-tips": {},
   "daily-tips": {
-   "id:14367": "pending"
+   "id:14367": "pending",
+   "id:14388": "pending"
   },
   "htft-tips": {
    "id:14376": "pending",
@@ -17,10 +18,13 @@
    "id:14365": "pending"
   },
   "premium-tips": {
-   "id:14377": "pending"
+   "id:14377": "pending",
+   "id:14391": "pending"
   },
   "special-tips": {
-   "id:14381": "pending"
+   "id:14381": "pending",
+   "id:14389": "pending",
+   "id:14392": "pending"
   }
  },
  "_sent": {
@@ -39,10 +43,10 @@
    "c466fa75"
   ],
   "cashscoretips:newVipMany": [
+   "a7a519a0",
    "c2898f86",
    "984ffb1d",
-   "cb96c84c",
-   "3b99a87f"
+   "cb96c84c"
   ],
   "cashscoretips:promo": [
    "09ade7ea",
@@ -82,11 +86,11 @@
    "441f06a3"
   ],
   "cashscoretips:newVip": [
+   "ec3e3bbf",
+   "cb726802",
    "309d3a91",
    "8e58c892",
-   "29c4b4a4",
-   "f7cae257",
-   "475b3d42"
+   "29c4b4a4"
   ],
   "cashscoretips:daily": [
    "347709ba",
