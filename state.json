@@ -31,7 +31,7 @@
   "discount": "2026-11-26",
   "cashback": "2026-11-27",
   "daily": "2026-11-27",
-  "promo": "2026-11-27 14h"
+  "promo": "2026-11-27 15h"
  },
  "_recent": {
   "cashscoretips:newFree": [
@@ -49,6 +49,7 @@
    "cb96c84c"
   ],
   "cashscoretips:promo": [
+   "563a25ce",
    "86f4ef25",
    "41965951",
    "51cccf23",
@@ -60,8 +61,7 @@
    "26005535",
    "fb2fe6d7",
    "289e37a5",
-   "dd445897",
-   "f6b5c4ba"
+   "dd445897"
   ],
   "cashscoretips:discount": [
    "e8066d24",
