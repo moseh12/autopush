@@ -4,7 +4,10 @@
   "over-tips": {},
   "daily-tips": {},
   "htft-tips": {},
-  "draws-tips": {},
+  "draws-tips": {
+   "id:14364": "pending",
+   "id:14365": "pending"
+  },
   "premium-tips": {},
   "special-tips": {}
  },
@@ -24,10 +27,10 @@
    "e51e63be"
   ],
   "cashscoretips:newVipMany": [
+   "c2898f86",
    "984ffb1d",
    "cb96c84c",
-   "3b99a87f",
-   "a7a519a0"
+   "3b99a87f"
   ],
   "cashscoretips:promo": [
    "09ade7ea",
