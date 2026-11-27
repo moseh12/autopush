@@ -2,7 +2,9 @@
  "cashscoretips": {
   "sure-tips": {},
   "over-tips": {},
-  "daily-tips": {},
+  "daily-tips": {
+   "id:14367": "pending"
+  },
   "htft-tips": {},
   "draws-tips": {
    "id:14364": "pending",
@@ -70,11 +72,11 @@
    "441f06a3"
   ],
   "cashscoretips:newVip": [
+   "475b3d42",
    "8621375e",
    "309d3a91",
    "ec3e3bbf",
-   "cb726802",
-   "29c4b4a4"
+   "cb726802"
   ],
   "cashscoretips:daily": [
    "347709ba",
