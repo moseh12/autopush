@@ -1,7 +1,7 @@
 {
  "cashscoretips": {
   "sure-tips": {
-   "id:14405": "pending",
+   "id:14405": "win",
    "id:14407": "pending"
   },
   "over-tips": {},
@@ -28,7 +28,7 @@
   }
  },
  "_sent": {
-  "discount": "2026-11-27",
+  "discount": "2026-11-28",
   "cashback": "2026-11-28",
   "daily": "2026-11-28",
   "promo": "2026-11-28 15h"
@@ -64,11 +64,11 @@
    "5df8def5"
   ],
   "cashscoretips:discount": [
+   "74c85729",
    "e1221dd1",
    "e8066d24",
    "628a24d7",
-   "980e9566",
-   "5ef67412"
+   "980e9566"
   ],
   "cashscoretips:cashback": [
    "161bb26a",
@@ -110,10 +110,10 @@
    "804a03ef"
   ],
   "cashscoretips:wonFree": [
+   "0e05d399",
    "ad18a0e1",
    "41111983",
-   "7a4707d1",
-   "aa9d80bd"
+   "7a4707d1"
   ],
   "cashscoretips:wonFreeMany": [
    "c888bbe5",
